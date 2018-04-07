@@ -1,5 +1,6 @@
 .header-section {
     margin-top: 20rem;
+    font-family: 'Amatic SC', cursive;
 }
 
 .title {
@@ -11,5 +12,21 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 10rem;
-    text-align: center
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
 }
+
+.header-section-cubes {
+    margin-top: 5rem;
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 5rem;
+}  
+
+.list-cubes {
+    max-width: 90%;
+    margin: 5rem, auto;
+    font-family: 'Amatic SC', cursive;
+    text-align: center;   
+}
+
+
