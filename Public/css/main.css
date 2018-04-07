@@ -29,12 +29,16 @@
 
 .list-cubes {
     max-width: 90%;
-    margin: 5rem, auto;
+    margin-left: auto;
+    margin-right: auto;
     font-family: 'Amatic SC', cursive;
     text-align: center   
 }
 
 .user-form-section {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
     font-family: 'Amatic SC', cursive;    
 }
 
