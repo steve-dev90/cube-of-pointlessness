@@ -1,11 +1,22 @@
-var express = require('express')
+const express = require('express')
+const server = express()
+const userRoutes = require('./routes/userRoutes')
+const cubeRoutes = require('./routes/cubeRoutes')
+const hbs = require('express-handlebars')
 
-var server = express()
+// Middleware
 
-server.use(express.static('./'))
+server.engine('hbs', hbs({extname: 'hbs'}))
+server.set('view engine', 'hbs')
+server.use(express.urlencoded({extended: true}))
+server.use(express.static('public'))
 
-server.get('/', (req, res) => {
-    res.send('<h1><em>Hello world</em></h1>')
+// Routes
+server.use('/users', userRoutes)
+server.use('/cubes', cubeRoutes)
+
+server.get('/', function (req, res) {
+  res.sendFile(__dirname + '/views/welcome.html') 
 })
 
 module.exports = server
