@@ -6,9 +6,15 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
     db.getPredefinedCubes()
-      .then(cubes => {
-          console.log(cubes)
-          res.render('Selectcube')
+      .then(predefinedCubes => {
+        console.log(predefinedCubes)
+        db.getCustomCubes()
+          .then(customCubes => {
+            console.log(customCubes) 
+            res.render('Selectcube', {predefinedCubes: predefinedCubes,
+              customCubes: customCubes})
+        })
+        
       })
         
 })

@@ -19,7 +19,8 @@ exports.seed = function(knex, Promise) {
       return knex('cubeRatings').insert([
         {user_id: 991, cube_id: 661, custom_cube: false, rating: 5 },
         {user_id: 992, cube_id: 661, custom_cube: false, rating: 4 },
-        {user_id: 991, cube_id: 662, custom_cube: false, rating: 3 }
+        {user_id: 991, cube_id: 662, custom_cube: false, rating: 3 },
+        {user_id: 991, cube_id: 551, custom_cube: true, rating: 3 }
       ])
     }),
 
