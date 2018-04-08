@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node index",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "knex": "knex"
   },
   "dependencies": {
     "express": "^4.16.3",
