@@ -16,7 +16,7 @@ server.use('/users', userRoutes)
 server.use('/cubes', cubeRoutes)
 
 server.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/welcome.html') 
+  res.sendFile(__dirname + '/views/Welcome.html') 
 })
 
 module.exports = server
