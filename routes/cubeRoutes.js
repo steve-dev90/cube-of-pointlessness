@@ -24,8 +24,4 @@ router.get('/new', (req, res) => {
      
 })
 
-// router.get('/1', function (req, res) {
-//     res.sendFile('/Users/stevetorrens/workspace/cube-of-pointlessness/cube.html') 
-//   })
-
 module.exports = router

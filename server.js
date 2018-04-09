@@ -19,4 +19,8 @@ server.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/Welcome.html') 
 })
 
+server.get('/1', function (req, res) {
+    res.sendFile(__dirname + '/public/cube.html') 
+  })
+
 module.exports = server
