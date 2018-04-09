@@ -8,7 +8,7 @@ function getPredefinedCubes (testConn) {
     return conn('predefinedCubes')
     .select('predefinedCubes.name', 'predefinedCubes.image', conn.raw("AVG(cubeRatings.rating) as rating"))
     .leftJoin('cubeRatings', 'predefinedCubes.id','cubeRatings.cube_id')
-    .groupByRaw('cubeRatings.cube_id')     
+    .groupByRaw('predefinedCubes.id')     
 }
 
 function getCustomCubes (testConn) {
@@ -16,7 +16,7 @@ function getCustomCubes (testConn) {
     return conn('customCubes')
     .select('customCubes.name', 'customCubes.image', conn.raw("AVG(cubeRatings.rating) as rating"))
     .leftJoin('cubeRatings', 'customCubes.id','cubeRatings.cube_id')
-    .groupByRaw('cubeRatings.cube_id')     
+    .groupByRaw('customCubes.id')     
 }
 
 module.exports = {
