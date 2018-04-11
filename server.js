@@ -1,26 +1,10 @@
 const express = require('express')
+
+const PORT = process.env.PORT || 3000
+
 const server = express()
-const userRoutes = require('./routes/userRoutes')
-const cubeRoutes = require('./routes/cubeRoutes')
-const hbs = require('express-handlebars')
-
-// Middleware
-
-server.engine('hbs', hbs({extname: 'hbs'}))
-server.set('view engine', 'hbs')
-server.use(express.urlencoded({extended: true}))
 server.use(express.static('public'))
 
-// Routes
-server.use('/users', userRoutes)
-server.use('/cubes', cubeRoutes)
-
-server.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/Welcome.html') 
+server.listen(PORT, () => {
+  console.log('Listening on port', PORT)
 })
-
-server.get('/1', function (req, res) {
-    res.sendFile(__dirname + '/public/cube.html') 
-  })
-
-module.exports = server
