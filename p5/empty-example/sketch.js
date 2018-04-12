@@ -11,6 +11,8 @@ function draw() {
   background(250);
   rotateY(frameCount * 0.01);
   
+
+  //color(255, 0, 0, 0.2 * 255);
   translate(sin(frameCount * 0.005) * 100, sin(frameCount * 0.005) * 100, sin(frameCount * 0.005));
   rotateZ(frameCount * 0.02);
    
@@ -26,10 +28,10 @@ function draw() {
   // y += 0.1
   // z += 0.0
     
-  var dirX = (mouseX / width - 0.5) * 2;
-  var dirY = (mouseY / height - 0.5) * 2;
-  pointLight(250, 250, 250, -dirX, -dirY, 0.8);
-  //ambientMaterial(250);
+  // var dirX = (mouseX / width - 0.5) * 2;
+  // var dirY = (mouseY / height - 0.5) * 2;
+  // pointLight(250, 250, 250, -dirX, -dirY, 0.8);
+  ambientMaterial(0, 1, .5, 0.2);
   noStroke()
 
   console.log('x: '+ x + ' y: ' + y + ' z: ' + z)
