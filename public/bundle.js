@@ -2521,9 +2521,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(24);
 
-var _Welcome = __webpack_require__(75);
+var _Header = __webpack_require__(91);
 
-var _Welcome2 = _interopRequireDefault(_Welcome);
+var _Header2 = _interopRequireDefault(_Header);
 
 var _WelcomeNav = __webpack_require__(76);
 
@@ -2543,7 +2543,9 @@ var App = function App() {
     _react2.default.createElement(
       'div',
       null,
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _Welcome2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
+          return _react2.default.createElement(_Header2.default, { title: 'Cube of Pointlessness', 'class': 'welcome-header-section' });
+        } }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _WelcomeNav2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes', component: _SelectCube2.default })
     )
@@ -8366,49 +8368,7 @@ var withRouter = function withRouter(Component) {
 
 
 /***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var Welcome = function Welcome() {
-  return _react2.default.createElement(
-    "div",
-    { "class": "welcome-header-section" },
-    _react2.default.createElement(
-      "div",
-      { "class": "container" },
-      _react2.default.createElement(
-        "div",
-        { "class": "row" },
-        _react2.default.createElement(
-          "div",
-          { "class": "twelve columns" },
-          _react2.default.createElement(
-            "h1",
-            { "class": "title" },
-            "Cube of Pointlessness"
-          )
-        )
-      )
-    )
-  );
-};
-
-exports.default = Welcome;
-
-/***/ }),
+/* 75 */,
 /* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8431,37 +8391,37 @@ var WelcomeNav = function WelcomeNav() {
 
   return _react2.default.createElement(
     'div',
-    { 'class': 'login-section' },
+    { className: 'login-section' },
     _react2.default.createElement(
       'div',
-      { 'class': 'container' },
+      { className: 'container' },
       _react2.default.createElement(
         'div',
-        { 'class': 'row' },
+        { className: 'row' },
         _react2.default.createElement(
           'div',
-          { 'class': 'one-third column value' },
+          { className: 'one-third column value' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { 'class': 'button', to: './cubes' },
+            { className: 'button', to: './cubes' },
             'Choose a cube'
           )
         ),
         _react2.default.createElement(
           'div',
-          { 'class': 'one-third column value' },
+          { className: 'one-third column value' },
           _react2.default.createElement(
             'a',
-            { 'class': 'button', href: './users/new' },
+            { className: 'button', href: './users/new' },
             'Register user'
           )
         ),
         _react2.default.createElement(
           'div',
-          { 'class': 'one-third column value' },
+          { className: 'one-third column value' },
           _react2.default.createElement(
             'a',
-            { 'class': 'button', href: './documentation' },
+            { className: 'button', href: './documentation' },
             'User documentation'
           )
         )
@@ -8491,7 +8451,7 @@ var _reactP5Wrapper = __webpack_require__(78);
 
 var _reactP5Wrapper2 = _interopRequireDefault(_reactP5Wrapper);
 
-var _Brown = __webpack_require__(92);
+var _Brown = __webpack_require__(81);
 
 var _Brown2 = _interopRequireDefault(_Brown);
 
@@ -80021,7 +79981,64 @@ module.exports = g;
 
 
 /***/ }),
-/* 81 */,
+/* 81 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+
+function sketch(p) {
+
+  p.setup = function () {
+    p.createCanvas(600, 600, p.WEBGL);
+    var x = 0; //does this centre the cube?
+  };
+
+  var vector = [0, 0, 0];
+
+  p.draw = function () {
+
+    var limits = [p.width / 2, p.height / 2, 200];
+
+    vector = vector.map(function (i, v) {
+      if (i > limits[v] / 2) {
+        return i = limits[v] / 2;
+      } else if (i < -limits[v] / 2) {
+        return i = -limits[v] / 2;
+      } else {
+        return i += p.random(-3, 3);
+      }
+    });
+
+    console.log('x', vector);
+
+    p.background(250);
+
+    p.rotateZ(p.frameCount * 0.02);
+    p.translate(vector[0], vector[1], vector[2]); //Should go first
+    p.rotateX(p.frameCount * 0.02);
+    p.rotateY(p.frameCount * 0.01);
+    p.specularMaterial('red');
+
+    var c1 = p.frameCount % 255;
+
+    p.ambientLight(100);
+    p.pointLight(c1, 250, 250, 100, 100, 0);
+    p.specularMaterial(204, 102, 0, 50);
+    //p.noStroke()
+
+    p.box(50);
+  };
+}
+
+exports.default = sketch;
+
+/***/ }),
 /* 82 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -95918,8 +95935,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 91 */,
-/* 92 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -95929,52 +95945,37 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _react = __webpack_require__(0);
 
-function sketch(p) {
+var _react2 = _interopRequireDefault(_react);
 
-  p.setup = function () {
-    p.createCanvas(600, 600, p.WEBGL);
-    var x = 0; //does this centre the cube?
-  };
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-  var vector = [0, 0, 0];
+var Header = function Header(props) {
+  return _react2.default.createElement(
+    "div",
+    { className: props.class },
+    _react2.default.createElement(
+      "div",
+      { className: "container" },
+      _react2.default.createElement(
+        "div",
+        { className: "row" },
+        _react2.default.createElement(
+          "div",
+          { className: "twelve columns" },
+          _react2.default.createElement(
+            "h1",
+            { className: "title" },
+            props.title
+          )
+        )
+      )
+    )
+  );
+};
 
-  p.draw = function () {
-
-    var limits = [p.width / 2, p.height / 2, 200];
-
-    vector = vector.map(function (i, v) {
-      if (i > limits[v] / 2) {
-        return i = limits[v] / 2;
-      } else if (i < -limits[v] / 2) {
-        return i = -limits[v] / 2;
-      } else {
-        return i += p.random(-3, 3);
-      }
-    });
-
-    console.log('x', vector);
-
-    p.background(250);
-
-    p.rotateZ(p.frameCount * 0.02);
-    p.translate(vector[0], vector[1], vector[2]); //Should go first
-    p.rotateX(p.frameCount * 0.02);
-    p.rotateY(p.frameCount * 0.01);
-    p.specularMaterial('red');
-
-    var c1 = p.frameCount % 255;
-
-    p.ambientLight(100);
-    p.pointLight(c1, 250, 250, 100, 100, 0);
-    p.specularMaterial(204, 102, 0, 50);
-    //p.noStroke()
-
-    p.box(50);
-  };
-}
-
-exports.default = sketch;
+exports.default = Header;
 
 /***/ })
 /******/ ]);
