@@ -18,7 +18,7 @@ const CubeNav = () => {
                <a href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"/></a>
               </div>
               <div className="one-third column value">
-               <h3>{cube.name}</h3>  
+                <Link to="./cubes/1"><h3>{cube.name}</h3></ Link> 
               </div>
               <div className="one-third column value">
                 <h3>{cube.rating}</h3>

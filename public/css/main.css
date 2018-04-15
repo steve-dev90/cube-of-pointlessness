@@ -52,6 +52,12 @@
     font-family: 'Amatic SC', cursive;    
 }
 
+.cubecanvas {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .blog-nav {
     /* background-color: rgb(230, 230, 230);
     color: white; */
