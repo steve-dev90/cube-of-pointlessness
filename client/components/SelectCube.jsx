@@ -1,13 +1,14 @@
 import React from 'react'
-import P5Wrapper from 'react-p5-wrapper'
-//import sketch from '../P5sketches/Protocube'
-import sketch from '../P5sketches/Brown'
+
+import Header from './Header'
+import CubeNav from './CubeNav'
 
 const SelectCube = () => {
   return (
-    <div>
-      <P5Wrapper sketch={sketch}/>
-    </div>
+    <React.Fragment>
+      <Header title={'Select a cube'} class={'header-section'} />
+      <CubeNav />
+    </React.Fragment>
   )
 }
 

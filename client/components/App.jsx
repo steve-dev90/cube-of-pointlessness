@@ -10,14 +10,14 @@ const App = () => {
 
   return (
     <Router>
-      <div >
+      <React.Fragment >
         <Route exact path='/' render={() => {
           return <Header title={'Cube of Pointlessness'} class={'welcome-header-section'} />
         }} />
         <Route exact path='/' component={WelcomeNav}/>
         <Route exact path='/cubes' component={SelectCube}/>
 
-      </div>  
+      </React.Fragment >  
     </Router>
   )
 }
