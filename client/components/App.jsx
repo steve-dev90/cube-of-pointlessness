@@ -18,9 +18,8 @@ const App = (props) => {
         }} />
         <Route exact path='/' component={WelcomeNav}/>
         <Route exact path='/cubes' component={SelectCube}/>
-        <Route path='/cubes/:id' component={Cube}/>
         {/* Don't understand this - see https://til.hashrocket.com/posts/z8cimdpghg-passing-props-down-to-react-router-route */}
-        <Route path='/cubes/:id' render={(routeProps) => {
+        <Route exact path='/cubes/:id' render={(routeProps) => {
           return <Cube title={'Random Cube'} {...routeProps} />
         }} />
 

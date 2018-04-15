@@ -7,7 +7,7 @@ const Footer = (props) => {
       <div className="container">
         <div className="row">       
           <div className="twelve columns">
-            <Link to="./" >Home</ Link>
+            <Link to='/' >Home</ Link>
           </div>
         </div>
       </div>     

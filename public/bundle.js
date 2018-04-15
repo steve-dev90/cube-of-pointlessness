@@ -2255,7 +2255,7 @@ var Footer = function Footer(props) {
           { className: 'twelve columns' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: './' },
+            { to: '/' },
             'Home'
           )
         )
@@ -2642,8 +2642,7 @@ var App = function App(props) {
         } }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _WelcomeNav2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes', component: _SelectCube2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/cubes/:id', component: _Cube2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/cubes/:id', render: function render(routeProps) {
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes/:id', render: function render(routeProps) {
           return _react2.default.createElement(_Cube2.default, _extends({ title: 'Random Cube' }, routeProps));
         } })
     )
@@ -8663,6 +8662,10 @@ var _reactP5Wrapper = __webpack_require__(81);
 
 var _reactP5Wrapper2 = _interopRequireDefault(_reactP5Wrapper);
 
+var _Protocube = __webpack_require__(94);
+
+var _Protocube2 = _interopRequireDefault(_Protocube);
+
 var _Brown = __webpack_require__(84);
 
 var _Brown2 = _interopRequireDefault(_Brown);
@@ -8677,14 +8680,15 @@ var _Header2 = _interopRequireDefault(_Header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var SelectCube = function SelectCube(props) {
+var Cube = function Cube(props) {
 
+  var sketch = _Protocube2.default;
   console.log(props.match.params.id);
 
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
-    _react2.default.createElement(_Header2.default, { title: 'props.title', 'class': 'header-section' }),
+    _react2.default.createElement(_Header2.default, { title: props.title, 'class': 'header-section' }),
     _react2.default.createElement(
       'div',
       { className: 'cubecanvas' },
@@ -8697,7 +8701,7 @@ var SelectCube = function SelectCube(props) {
           _react2.default.createElement(
             'div',
             { className: 'twelve columns' },
-            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: _Brown2.default })
+            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: sketch })
           )
         )
       )
@@ -8705,8 +8709,8 @@ var SelectCube = function SelectCube(props) {
     _react2.default.createElement(_Footer2.default, null)
   );
 };
-//import sketch from '../P5sketches/Protocube'
-exports.default = SelectCube;
+
+exports.default = Cube;
 
 /***/ }),
 /* 81 */
@@ -96174,6 +96178,47 @@ function camelize(string) {
 }
 
 module.exports = camelize;
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+
+function sketch(p) {
+
+  p.setup = function () {
+    p.createCanvas(600, 600, p.WEBGL);
+  };
+
+  p.draw = function () {
+
+    p.background(250);
+    p.rotateY(p.frameCount * 0.01);
+
+    p.translate(p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005));
+    p.rotateZ(p.frameCount * 0.02);
+
+    p.specularMaterial('red');
+
+    var c1 = p.frameCount % 255;
+
+    p.ambientLight(100);
+    p.pointLight(c1, 250, 250, 100, 100, 0);
+    p.specularMaterial(204, 102, 0, 50);
+    //p.noStroke()
+
+    p.box(50);
+  };
+}
+
+exports.default = sketch;
 
 /***/ })
 /******/ ]);

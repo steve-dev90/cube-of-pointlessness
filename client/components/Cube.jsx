@@ -1,18 +1,19 @@
 import React from 'react'
 import P5Wrapper from 'react-p5-wrapper'
-//import sketch from '../P5sketches/Protocube'
-import sketch from '../P5sketches/Brown'
+import sketch_1 from '../P5sketches/Protocube'
+import sketch_2 from '../P5sketches/Brown'
 import Footer from './Footer';
 import Header from './Header'
 
 
-const SelectCube = (props) => {
+const Cube = (props) => {
 
+  var sketch = sketch_1
   console.log(props.match.params.id) 
   
   return ( 
     <React.Fragment>
-      <Header title={'props.title'} class={'header-section'} />
+      <Header title={props.title} class={'header-section'} />
         <div className="cubecanvas">
           <div className="container">
             <div className="row">       
@@ -27,4 +28,4 @@ const SelectCube = (props) => {
   )
 }
 
-export default SelectCube
+export default Cube
