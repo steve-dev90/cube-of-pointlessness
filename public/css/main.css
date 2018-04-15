@@ -31,6 +31,12 @@
     margin-bottom: 5rem;
 }  
 
+.footer-section {
+    margin-top: 5rem;
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+}
+
 .list-cubes {
     max-width: 90%;
     margin-left: auto;
