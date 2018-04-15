@@ -24,7 +24,7 @@ function sketch (p) {
       }
     })
     
-    console.log('x',vector)
+    //console.log('x',vector)
 
     p.background(250)
     

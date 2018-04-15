@@ -7,7 +7,8 @@ import WelcomeNav from './WelcomeNav'
 import SelectCube from './SelectCube'
 import Cube from './Cube'
 
-const App = () => {
+const App = (props) => {
+  
 
   return (
     <Router>
@@ -17,8 +18,10 @@ const App = () => {
         }} />
         <Route exact path='/' component={WelcomeNav}/>
         <Route exact path='/cubes' component={SelectCube}/>
-        <Route path='/cubes/1' render={() => {
-          return <Cube title={'Random Cube'}/>
+        <Route path='/cubes/:id' component={Cube}/>
+        {/* Don't understand this - see https://til.hashrocket.com/posts/z8cimdpghg-passing-props-down-to-react-router-route */}
+        <Route path='/cubes/:id' render={(routeProps) => {
+          return <Cube title={'Random Cube'} {...routeProps} />
         }} />
 
       </React.Fragment>  

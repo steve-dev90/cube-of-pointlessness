@@ -7,9 +7,12 @@ import Header from './Header'
 
 
 const SelectCube = (props) => {
+
+  console.log(props.match.params.id) 
+  
   return ( 
     <React.Fragment>
-      <Header title={props.title} class={'header-section'} />
+      <Header title={'props.title'} class={'header-section'} />
         <div className="cubecanvas">
           <div className="container">
             <div className="row">       

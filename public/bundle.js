@@ -2603,6 +2603,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -2627,7 +2629,7 @@ var _Cube2 = _interopRequireDefault(_Cube);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var App = function App() {
+var App = function App(props) {
 
   return _react2.default.createElement(
     _reactRouterDom.HashRouter,
@@ -2640,8 +2642,9 @@ var App = function App() {
         } }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _WelcomeNav2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes', component: _SelectCube2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/cubes/1', render: function render() {
-          return _react2.default.createElement(_Cube2.default, { title: 'Random Cube' });
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/cubes/:id', component: _Cube2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/cubes/:id', render: function render(routeProps) {
+          return _react2.default.createElement(_Cube2.default, _extends({ title: 'Random Cube' }, routeProps));
         } })
     )
   );
@@ -8586,9 +8589,11 @@ var _reactRouterDom = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var cubes = [{ name: 'Sine Cube', rating: 4 }, { name: 'Random Cube', rating: 3 }, { name: 'Yet Cube', rating: 2 }];
+var cubes = [{ id: 1, name: 'Sine Cube', rating: 4 }, { id: 2, name: 'Random Cube', rating: 3 }, { id: 3, name: 'Yet Cube', rating: 2 }];
 
-var CubeNav = function CubeNav() {
+var CubeNav = function CubeNav(props) {
+
+  //console.log(props.match.params.id)  
 
   return _react2.default.createElement(
     'div',
@@ -8614,7 +8619,7 @@ var CubeNav = function CubeNav() {
             { className: 'one-third column value' },
             _react2.default.createElement(
               _reactRouterDom.Link,
-              { to: './cubes/1' },
+              { to: '/cubes/' + cube.id },
               _react2.default.createElement(
                 'h3',
                 null,
@@ -8673,10 +8678,13 @@ var _Header2 = _interopRequireDefault(_Header);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SelectCube = function SelectCube(props) {
+
+  console.log(props.match.params.id);
+
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
-    _react2.default.createElement(_Header2.default, { title: props.title, 'class': 'header-section' }),
+    _react2.default.createElement(_Header2.default, { title: 'props.title', 'class': 'header-section' }),
     _react2.default.createElement(
       'div',
       { className: 'cubecanvas' },
@@ -80248,7 +80256,7 @@ function sketch(p) {
       }
     });
 
-    console.log('x', vector);
+    //console.log('x',vector)
 
     p.background(250);
 
