@@ -8,7 +8,7 @@ import Header from './Header'
 
 const Cube = (props) => {
 
-  var sketch = sketch_1
+  var sketch = [sketch_1, sketch_2]
   console.log(props.match.params.id) 
   
   return ( 
@@ -18,7 +18,7 @@ const Cube = (props) => {
           <div className="container">
             <div className="row">       
               <div className="twelve columns">
-                <P5Wrapper sketch={sketch}/>
+                <P5Wrapper sketch={sketch[props.match.params.id-1]}/>
               </div>
             </div>
           </div>     

@@ -2515,7 +2515,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(87);
+var isTextNode = __webpack_require__(88);
 
 /*eslint-disable no-bitwise */
 
@@ -2586,7 +2586,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var React = __webpack_require__(0);
-var ReactDOM = __webpack_require__(85);
+var ReactDOM = __webpack_require__(86);
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(React.createElement(_App2.default, null), document.getElementById('app'));
@@ -8662,11 +8662,11 @@ var _reactP5Wrapper = __webpack_require__(81);
 
 var _reactP5Wrapper2 = _interopRequireDefault(_reactP5Wrapper);
 
-var _Protocube = __webpack_require__(94);
+var _Protocube = __webpack_require__(84);
 
 var _Protocube2 = _interopRequireDefault(_Protocube);
 
-var _Brown = __webpack_require__(84);
+var _Brown = __webpack_require__(85);
 
 var _Brown2 = _interopRequireDefault(_Brown);
 
@@ -8682,7 +8682,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Cube = function Cube(props) {
 
-  var sketch = _Protocube2.default;
+  var sketch = [_Protocube2.default, _Brown2.default];
   console.log(props.match.params.id);
 
   return _react2.default.createElement(
@@ -8701,7 +8701,7 @@ var Cube = function Cube(props) {
           _react2.default.createElement(
             'div',
             { className: 'twelve columns' },
-            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: sketch })
+            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: sketch[props.match.params.id - 1] })
           )
         )
       )
@@ -80241,6 +80241,47 @@ function sketch(p) {
 
   p.setup = function () {
     p.createCanvas(600, 600, p.WEBGL);
+  };
+
+  p.draw = function () {
+
+    p.background(250);
+    p.rotateY(p.frameCount * 0.01);
+
+    p.translate(p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005));
+    p.rotateZ(p.frameCount * 0.02);
+
+    p.specularMaterial('red');
+
+    var c1 = p.frameCount % 255;
+
+    p.ambientLight(100);
+    p.pointLight(c1, 250, 250, 100, 100, 0);
+    p.specularMaterial(204, 102, 0, 50);
+    //p.noStroke()
+
+    p.box(50);
+  };
+}
+
+exports.default = sketch;
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+
+function sketch(p) {
+
+  p.setup = function () {
+    p.createCanvas(600, 600, p.WEBGL);
     var x = 0; //does this centre the cube?
   };
 
@@ -80284,7 +80325,7 @@ function sketch(p) {
 exports.default = sketch;
 
 /***/ }),
-/* 85 */
+/* 86 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80322,15 +80363,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(86);
+  module.exports = __webpack_require__(87);
 } else {
-  module.exports = __webpack_require__(89);
+  module.exports = __webpack_require__(90);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 86 */
+/* 87 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80566,7 +80607,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80581,7 +80622,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(88);
+var isNode = __webpack_require__(89);
 
 /**
  * @param {*} object The object to check.
@@ -80594,7 +80635,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80622,7 +80663,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80656,8 +80697,8 @@ var containsNode = __webpack_require__(38);
 var focusNode = __webpack_require__(39);
 var emptyObject = __webpack_require__(11);
 var checkPropTypes = __webpack_require__(25);
-var hyphenateStyleName = __webpack_require__(90);
-var camelizeStyleName = __webpack_require__(92);
+var hyphenateStyleName = __webpack_require__(91);
+var camelizeStyleName = __webpack_require__(93);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -96024,7 +96065,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96039,7 +96080,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(91);
+var hyphenate = __webpack_require__(92);
 
 var msPattern = /^ms-/;
 
@@ -96066,7 +96107,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96102,7 +96143,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96117,7 +96158,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(93);
+var camelize = __webpack_require__(94);
 
 var msPattern = /^-ms-/;
 
@@ -96145,7 +96186,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96178,47 +96219,6 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-
-function sketch(p) {
-
-  p.setup = function () {
-    p.createCanvas(600, 600, p.WEBGL);
-  };
-
-  p.draw = function () {
-
-    p.background(250);
-    p.rotateY(p.frameCount * 0.01);
-
-    p.translate(p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005));
-    p.rotateZ(p.frameCount * 0.02);
-
-    p.specularMaterial('red');
-
-    var c1 = p.frameCount % 255;
-
-    p.ambientLight(100);
-    p.pointLight(c1, 250, 250, 100, 100, 0);
-    p.specularMaterial(204, 102, 0, 50);
-    //p.noStroke()
-
-    p.box(50);
-  };
-}
-
-exports.default = sketch;
 
 /***/ })
 /******/ ]);
