@@ -1,5 +1,6 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
+import {getCubes} from '../api'
 
 const cubes = [{id: 1, name: 'Sine Cube', rating: 4},
           {id:2, name: 'Random Cube', rating: 3},
