@@ -2515,7 +2515,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(88);
+var isTextNode = __webpack_require__(89);
 
 /*eslint-disable no-bitwise */
 
@@ -2586,7 +2586,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var React = __webpack_require__(0);
-var ReactDOM = __webpack_require__(86);
+var ReactDOM = __webpack_require__(87);
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(React.createElement(_App2.default, null), document.getElementById('app'));
@@ -8680,6 +8680,10 @@ var _Header = __webpack_require__(24);
 
 var _Header2 = _interopRequireDefault(_Header);
 
+var _AddRating = __webpack_require__(86);
+
+var _AddRating2 = _interopRequireDefault(_AddRating);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8704,6 +8708,7 @@ var Cube = function (_React$Component) {
     };
 
     _this.rateCubeButton = _this.rateCubeButton.bind(_this);
+    _this.hideRatingForm = _this.hideRatingForm.bind(_this);
 
     return _this;
   }
@@ -8714,6 +8719,13 @@ var Cube = function (_React$Component) {
       console.log('heeeeloooo');
       this.setState({
         addRatingForm: true
+      });
+    }
+  }, {
+    key: 'hideRatingForm',
+    value: function hideRatingForm() {
+      this.setState({
+        addRatingForm: false
       });
     }
   }, {
@@ -8742,7 +8754,8 @@ var Cube = function (_React$Component) {
                   { onClick: this.rateCubeButton },
                   ' Rate Cube '
                 ),
-                this.state.addRatingForm && _react2.default.createElement(RateCube, null)
+                this.state.addRatingForm && _react2.default.createElement(_AddRating2.default, {
+                  hideRatingForm: this.hideRatingForm })
               )
             )
           )
@@ -80374,6 +80387,111 @@ exports.default = sketch;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//import {appendWidget} from '../api'
+
+var AddRating = function (_React$Component) {
+  _inherits(AddRating, _React$Component);
+
+  function AddRating(props) {
+    _classCallCheck(this, AddRating);
+
+    var _this = _possibleConstructorReturn(this, (AddRating.__proto__ || Object.getPrototypeOf(AddRating)).call(this, props));
+
+    _this.state = {
+      user_name: '',
+      user_id: 0,
+      cube_id: 0,
+      cube_rating: 1
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.addRating = _this.addRating.bind(_this);
+    return _this;
+  }
+
+  _createClass(AddRating, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      console.log(e.target.value);
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
+    }
+  }, {
+    key: 'addRating',
+    value: function addRating(e) {
+      //api call for DB goes here
+      console.log(this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'form',
+          null,
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement('input', { placeholder: 'User name', name: 'name',
+              onChange: this.handleChange,
+              value: this.state.name
+            })
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            _react2.default.createElement('input', { placeholder: 'Rating', name: 'cube_rating',
+              onChange: this.handleChange,
+              value: this.state.cube_rating
+            })
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'button', onClick: this.addRating },
+            'Add your rating'
+          ),
+          _react2.default.createElement(
+            'button',
+            { type: 'button', onClick: this.props.hideRatingForm },
+            'Cancel'
+          )
+        )
+      );
+    }
+  }]);
+
+  return AddRating;
+}(_react2.default.Component);
+
+exports.default = AddRating;
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 function checkDCE() {
@@ -80408,15 +80526,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(87);
+  module.exports = __webpack_require__(88);
 } else {
-  module.exports = __webpack_require__(90);
+  module.exports = __webpack_require__(91);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 87 */
+/* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80652,7 +80770,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 88 */
+/* 89 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80667,7 +80785,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(89);
+var isNode = __webpack_require__(90);
 
 /**
  * @param {*} object The object to check.
@@ -80680,7 +80798,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 89 */
+/* 90 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80708,7 +80826,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 90 */
+/* 91 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -80742,8 +80860,8 @@ var containsNode = __webpack_require__(38);
 var focusNode = __webpack_require__(39);
 var emptyObject = __webpack_require__(11);
 var checkPropTypes = __webpack_require__(25);
-var hyphenateStyleName = __webpack_require__(91);
-var camelizeStyleName = __webpack_require__(93);
+var hyphenateStyleName = __webpack_require__(92);
+var camelizeStyleName = __webpack_require__(94);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -96110,7 +96228,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 91 */
+/* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96125,7 +96243,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(92);
+var hyphenate = __webpack_require__(93);
 
 var msPattern = /^ms-/;
 
@@ -96152,7 +96270,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 92 */
+/* 93 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96188,7 +96306,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 93 */
+/* 94 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -96203,7 +96321,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(94);
+var camelize = __webpack_require__(95);
 
 var msPattern = /^-ms-/;
 
@@ -96231,7 +96349,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 94 */
+/* 95 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

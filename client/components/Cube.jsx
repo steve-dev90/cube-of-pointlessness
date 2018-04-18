@@ -2,8 +2,9 @@ import React from 'react'
 import P5Wrapper from 'react-p5-wrapper'
 import sketch_1 from '../P5sketches/Protocube'
 import sketch_2 from '../P5sketches/Brown'
-import Footer from './Footer';
+import Footer from './Footer'
 import Header from './Header'
+import AddRating from './AddRating'
 
 
 class Cube extends React.Component {
@@ -19,6 +20,7 @@ class Cube extends React.Component {
     }
 
     this.rateCubeButton = this.rateCubeButton.bind(this)
+    this.hideRatingForm = this.hideRatingForm.bind(this)
 
   }
 
@@ -27,7 +29,12 @@ class Cube extends React.Component {
     this.setState({
       addRatingForm: true
     })
+  }
 
+  hideRatingForm () {
+    this.setState({
+      addRatingForm: false
+    })  
   }
   
   render() {
@@ -41,7 +48,8 @@ class Cube extends React.Component {
                 <div className="twelve columns">
                   <P5Wrapper sketch={this.state.sketch[this.state.sketch_id]}/>
                   <button onClick={this.rateCubeButton}> Rate Cube </button>
-                  {this.state.addRatingForm && <RateCube />}
+                  {this.state.addRatingForm && <AddRating 
+                    hideRatingForm={this.hideRatingForm}/>}
                 </div>
               </div>
             </div> 
