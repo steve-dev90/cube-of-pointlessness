@@ -8654,6 +8654,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
@@ -8680,35 +8682,78 @@ var _Header2 = _interopRequireDefault(_Header);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Cube = function Cube(props) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  var sketch = [_Protocube2.default, _Brown2.default];
-  console.log(props.match.params.id);
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  return _react2.default.createElement(
-    _react2.default.Fragment,
-    null,
-    _react2.default.createElement(_Header2.default, { title: props.title, 'class': 'header-section' }),
-    _react2.default.createElement(
-      'div',
-      { className: 'cubecanvas' },
-      _react2.default.createElement(
-        'div',
-        { className: 'container' },
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Cube = function (_React$Component) {
+  _inherits(Cube, _React$Component);
+
+  function Cube(props) {
+    _classCallCheck(this, Cube);
+
+    var _this = _possibleConstructorReturn(this, (Cube.__proto__ || Object.getPrototypeOf(Cube)).call(this, props));
+
+    _this.state = {
+      addRatingForm: false,
+      sketch: [_Protocube2.default, _Brown2.default],
+      title: props.title,
+      sketch_id: props.match.params.id - 1
+    };
+
+    _this.rateCubeButton = _this.rateCubeButton.bind(_this);
+
+    return _this;
+  }
+
+  _createClass(Cube, [{
+    key: 'rateCubeButton',
+    value: function rateCubeButton() {
+      console.log('heeeeloooo');
+      this.setState({
+        addRatingForm: true
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+
+      return _react2.default.createElement(
+        _react2.default.Fragment,
+        null,
+        _react2.default.createElement(_Header2.default, { title: this.state.title, 'class': 'header-section' }),
         _react2.default.createElement(
           'div',
-          { className: 'row' },
+          { className: 'cubecanvas' },
           _react2.default.createElement(
             'div',
-            { className: 'twelve columns' },
-            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: sketch[props.match.params.id - 1] })
+            { className: 'container' },
+            _react2.default.createElement(
+              'div',
+              { className: 'row' },
+              _react2.default.createElement(
+                'div',
+                { className: 'twelve columns' },
+                _react2.default.createElement(_reactP5Wrapper2.default, { sketch: this.state.sketch[this.state.sketch_id] }),
+                _react2.default.createElement(
+                  'button',
+                  { onClick: this.rateCubeButton },
+                  ' Rate Cube '
+                ),
+                this.state.addRatingForm && _react2.default.createElement(RateCube, null)
+              )
+            )
           )
-        )
-      )
-    ),
-    _react2.default.createElement(_Footer2.default, null)
-  );
-};
+        ),
+        _react2.default.createElement(_Footer2.default, null)
+      );
+    }
+  }]);
+
+  return Cube;
+}(_react2.default.Component);
 
 exports.default = Cube;
 
