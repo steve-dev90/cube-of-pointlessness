@@ -31,6 +31,7 @@
     "react-p5-wrapper": "^0.0.4",
     "react-router-dom": "^4.2.2",
     "sqlite3": "^4.0.0",
+    "superagent": "^3.8.2",
     "webpack": "^3.10.0"
   }
 }

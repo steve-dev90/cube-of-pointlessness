@@ -1,11 +1,12 @@
 import request from 'superagent'
 
-const url = 'http://localhost:3000/api'
+const url = '/api'
 
 export function getCubes (callback) {
   request
     .get(url+'/cubes')
     .end((err, res) => {
+      console.log('get', res.body)  
       callback(err, res.body)
     })
 }
