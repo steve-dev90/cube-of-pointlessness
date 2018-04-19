@@ -2,52 +2,56 @@ import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
 import {getCubes} from '../api'
 
-const cubes_data = [{id: 1, name: 'Sine Cube', rating: 4},
-          {id:2, name: 'Random Cube', rating: 3},
-          {id:3, name: 'Yet Cube', rating: 2}]
 
 class CubeNav extends React.Component {
 
   constructor(props) {
+    console.log('Cubenav2 ren',props) 
     super(props)
 
     this.state = {
-      cubes: cubes_data,
+      cubes: []
     }
 
-    this.refreshCubes = this.refreshCubes.bind(this)
-    this.renderCubes = this.renderCubes.bind(this)
-
+    // this.refreshCubes = this.refreshCubes.bind(this)
+    // this.renderCubes = this.renderCubes.bind(this)
 
   }
 
-  componentDidMount () {
-    this.refreshCubes()
-  }
+  // componentDidMount () {
+  //   this.refreshCubes()
+  // }
 
-  refreshCubes (err) {
-    this.setState({
-      error: err,
-    })
-    getCubes(this.renderCubes)
-  }
+  // refreshCubes (err) {
+  //   this.setState({
+  //     error: err,
+  //   })
+  //   getCubes(this.renderCubes)
+  // }
 
-  renderCubes (err, cubes) {
-    console.log('cubenav',cubes)
-    this.setState({
-      error: err,
-      cubes: cubes || []
-    })
-  }
+  // renderCubes (err, cubes) {
+  //   console.log('cubenav',cubes)
+  //   this.setState({
+  //     error: err,
+  //     cubes: cubes || []
+  //   })
+  // }
 
-  //console.log(props.match.params.id)  
 
-  render() {
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("New Props", nextProps.cubes)
+  //   this.setState({cubes: nextProps.cubes})
+  // }
+  
+
+  render(props) {
+    console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
     return (
       <div className="list-cubes">
         <div className="container">
 
-          {this.state.cubes.map(cube => {
+          {this.props.cubes.map((cube) => {
+            
             return (
               <div className ="row">
                 <div className="one-third column value">

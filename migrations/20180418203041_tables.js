@@ -11,7 +11,7 @@ exports.up = function(knex, Promise) {
         knex.schema.createTable('cubes', function (table) {
             table.increments('id').primary()
             table.string('name')
-            table.string('P5_sketch_name')
+            table.string('image')
         }),
 
         knex.schema.createTable('cubeRatings', function (table) {

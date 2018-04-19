@@ -4,11 +4,12 @@ import Header from './Header'
 import CubeNav from './CubeNav'
 import Footer from './Footer'
 
-const SelectCube = () => {
+const SelectCube = (props) => {
+  console.log('Select Cube', props.cubes)
   return (
     <React.Fragment>
       <Header title={'Select a cube'} class={'header-section'} />
-      <CubeNav />
+      <CubeNav cubes={props.cubes} />
       <Footer />
     </React.Fragment>
   )

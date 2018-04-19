@@ -14,9 +14,8 @@ class Cube extends React.Component {
 
     this.state = {
       addRatingForm: false,
-      sketch: [sketch_1, sketch_2],
-      title: props.title,
-      sketch_id: (props.match.params.id-1)
+      sketch: {661: sketch_1, 662: sketch_2, 663: sketch_2},
+      //sketch_id: (props.match.params.id-1)
     }
 
     this.rateCubeButton = this.rateCubeButton.bind(this)
@@ -37,16 +36,20 @@ class Cube extends React.Component {
     })  
   }
   
-  render() {
+  render(props) {
     
+    var title = this.props.cubes
+                  .find(cube => cube.id == this.props.match.params.id)
+                  .name
+    console.log('CUBES',title)  
     return ( 
       <React.Fragment>
-        <Header title={this.state.title} class={'header-section'} />
+        <Header title={title} class={'header-section'} />
           <div className="cubecanvas">
             <div className="container">
               <div className="row">       
                 <div className="twelve columns">
-                  <P5Wrapper sketch={this.state.sketch[this.state.sketch_id]}/>
+                  <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}/>
                   <button onClick={this.rateCubeButton}> Rate Cube </button>
                   {this.state.addRatingForm && <AddRating 
                     hideRatingForm={this.hideRatingForm}/>}

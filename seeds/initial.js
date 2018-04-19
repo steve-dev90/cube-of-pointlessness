@@ -27,9 +27,9 @@ exports.seed = function(knex, Promise) {
     .then(function () {
       // Inserts seed entries
       return knex('cubes').insert([
-        {id: 661, name: 'Sine Cube', P5_sketch_name: 'test.jpg' },
-        {id: 662, name: 'Random Cube', P5_sketch_name: 'test.jpg' },
-        {id: 663, name: 'Wind Cube', P5_sketch_name: 'test.jpg' },
+        {id: 661, name: 'Sine Cube', image: 'test.png' },
+        {id: 662, name: 'Random Cube', image: 'test.png' },
+        {id: 663, name: 'Wind Cube', image: 'test.png' },
       ])
     })      
   ])
