@@ -6,46 +6,17 @@ import {getCubes} from '../api'
 class CubeNav extends React.Component {
 
   constructor(props) {
-    console.log('Cubenav2 ren',props) 
+    //console.log('Cubenav2 ren',props) 
     super(props)
 
     this.state = {
       cubes: []
     }
 
-    // this.refreshCubes = this.refreshCubes.bind(this)
-    // this.renderCubes = this.renderCubes.bind(this)
-
   }
 
-  // componentDidMount () {
-  //   this.refreshCubes()
-  // }
-
-  // refreshCubes (err) {
-  //   this.setState({
-  //     error: err,
-  //   })
-  //   getCubes(this.renderCubes)
-  // }
-
-  // renderCubes (err, cubes) {
-  //   console.log('cubenav',cubes)
-  //   this.setState({
-  //     error: err,
-  //     cubes: cubes || []
-  //   })
-  // }
-
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("New Props", nextProps.cubes)
-  //   this.setState({cubes: nextProps.cubes})
-  // }
-  
-
   render(props) {
-    console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
+    //console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
     return (
       <div className="list-cubes">
         <div className="container">

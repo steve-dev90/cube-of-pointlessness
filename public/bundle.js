@@ -2232,6 +2232,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getCubes = getCubes;
+exports.addCubeRating = addCubeRating;
 
 var _superagent = __webpack_require__(79);
 
@@ -2245,6 +2246,14 @@ function getCubes(callback) {
   _superagent2.default.get(url + '/cubes').end(function (err, res) {
     console.log('get', res.body);
     callback(err, res.body);
+  });
+}
+
+function addCubeRating(cubeRating, callback) {
+  cubeRating.rating = Number(cubeRating.rating);
+  console.log('api', cubeRating);
+  _superagent2.default.post(url + ('/cubes/' + cubeRating.cube_id)).send(cubeRating).end(function (err, res) {
+    callback(err);
   });
 }
 
@@ -2747,7 +2756,8 @@ var App = function (_React$Component) {
               return _react2.default.createElement(_SelectCube2.default, _extends({ cubes: _this2.state.cubes }, props));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes/:id', render: function render(props) {
-              return _react2.default.createElement(_Cube2.default, _extends({ cubes: _this2.state.cubes }, props));
+              return _react2.default.createElement(_Cube2.default, _extends({ cubes: _this2.state.cubes, refreshCubes: _this2.refreshCubes
+              }, props));
             } })
         )
       );
@@ -10707,7 +10717,7 @@ var _Footer2 = _interopRequireDefault(_Footer);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var SelectCube = function SelectCube(props) {
-  console.log('Select Cube', props.cubes);
+  //console.log('Select Cube', props.cubes)
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
@@ -10754,49 +10764,21 @@ var CubeNav = function (_React$Component) {
   function CubeNav(props) {
     _classCallCheck(this, CubeNav);
 
-    console.log('Cubenav2 ren', props);
-
     var _this = _possibleConstructorReturn(this, (CubeNav.__proto__ || Object.getPrototypeOf(CubeNav)).call(this, props));
+    //console.log('Cubenav2 ren',props) 
+
 
     _this.state = {
       cubes: []
+    };
 
-      // this.refreshCubes = this.refreshCubes.bind(this)
-      // this.renderCubes = this.renderCubes.bind(this)
-
-    };return _this;
+    return _this;
   }
-
-  // componentDidMount () {
-  //   this.refreshCubes()
-  // }
-
-  // refreshCubes (err) {
-  //   this.setState({
-  //     error: err,
-  //   })
-  //   getCubes(this.renderCubes)
-  // }
-
-  // renderCubes (err, cubes) {
-  //   console.log('cubenav',cubes)
-  //   this.setState({
-  //     error: err,
-  //     cubes: cubes || []
-  //   })
-  // }
-
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("New Props", nextProps.cubes)
-  //   this.setState({cubes: nextProps.cubes})
-  // }
-
 
   _createClass(CubeNav, [{
     key: 'render',
     value: function render(props) {
-      console.log('Cubenav ren', this.state.cubes, this.props.cubes);
+      //console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
       return _react2.default.createElement(
         'div',
         { className: 'list-cubes' },
@@ -10940,14 +10922,15 @@ var Cube = function (_React$Component) {
     value: function render(props) {
       var _this2 = this;
 
-      var title = this.props.cubes.find(function (cube) {
+      var cube = this.props.cubes.find(function (cube) {
         return cube.id == _this2.props.match.params.id;
-      }).name;
-      console.log('CUBES', title);
+      });
+
+      console.log('CUBES', cube);
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
-        _react2.default.createElement(_Header2.default, { title: title, 'class': 'header-section' }),
+        _react2.default.createElement(_Header2.default, { title: cube.name, 'class': 'header-section' }),
         _react2.default.createElement(
           'div',
           { className: 'cubecanvas' },
@@ -10966,7 +10949,8 @@ var Cube = function (_React$Component) {
                   { onClick: this.rateCubeButton },
                   ' Rate Cube '
                 ),
-                this.state.addRatingForm && _react2.default.createElement(_AddRating2.default, {
+                this.state.addRatingForm && _react2.default.createElement(_AddRating2.default, { cube_id: cube.id,
+                  refreshCubes: this.props.refreshCubes,
                   hideRatingForm: this.hideRatingForm })
               )
             )
@@ -82611,6 +82595,8 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _api = __webpack_require__(33);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -82621,8 +82607,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import {appendWidget} from '../api'
-
 var AddRating = function (_React$Component) {
   _inherits(AddRating, _React$Component);
 
@@ -82632,10 +82616,9 @@ var AddRating = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AddRating.__proto__ || Object.getPrototypeOf(AddRating)).call(this, props));
 
     _this.state = {
-      user_name: '',
-      user_id: 0,
-      cube_id: 0,
-      cube_rating: 1
+      user_id: 500,
+      cube_id: props.cube_id,
+      rating: 1
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.addRating = _this.addRating.bind(_this);
@@ -82652,7 +82635,7 @@ var AddRating = function (_React$Component) {
     key: 'addRating',
     value: function addRating(e) {
       //api call for DB goes here
-      console.log(this.state);
+      (0, _api.addCubeRating)(this.state, this.props.refreshCubes);
     }
   }, {
     key: 'render',
@@ -82674,7 +82657,7 @@ var AddRating = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement('input', { placeholder: 'Rating', name: 'cube_rating',
+            _react2.default.createElement('input', { placeholder: 'Rating', name: 'rating',
               onChange: this.handleChange,
               value: this.state.cube_rating
             })

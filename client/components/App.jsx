@@ -56,7 +56,8 @@ class App extends React.Component {
           }} />
           {/* Don't understand this - see https://til.hashrocket.com/posts/z8cimdpghg-passing-props-down-to-react-router-route */}
           <Route exact path='/cubes/:id' render={(props) => {
-            return <Cube cubes={this.state.cubes} {...props} />
+            return <Cube cubes={this.state.cubes} refreshCubes={this.refreshCubes} 
+            {...props} />
           }} />
 
         </React.Fragment>  

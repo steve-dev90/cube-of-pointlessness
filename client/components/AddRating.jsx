@@ -1,15 +1,14 @@
 import React from 'react'
 
-//import {appendWidget} from '../api'
+import {addCubeRating} from '../api'
 
 export default class AddRating extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      user_name: '',
-      user_id: 0,
-      cube_id: 0,
-      cube_rating: 1,
+      user_id: 500,
+      cube_id: props.cube_id,
+      rating: 1,
     }
     this.handleChange = this.handleChange.bind(this)
     this.addRating = this.addRating.bind(this)
@@ -24,7 +23,7 @@ export default class AddRating extends React.Component {
 
   addRating (e) {
     //api call for DB goes here
-    console.log(this.state)
+    addCubeRating(this.state, this.props.refreshCubes)
   }
 
   render () {
@@ -35,7 +34,7 @@ export default class AddRating extends React.Component {
             onChange={this.handleChange}
             value={this.state.name}
           /></p>
-          <p><input placeholder='Rating' name='cube_rating'
+          <p><input placeholder='Rating' name='rating'
             onChange={this.handleChange}
             value={this.state.cube_rating}
           /></p>

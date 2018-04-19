@@ -7,9 +7,9 @@ const router = express.Router()
 const db = require('../db/db')
 
 router.get('/', (req, res) => {
-    db.getCubes()
+    db.getCubes2()
       .then(cubes => {
-        console.log('router',res.body)  
+        console.log('router',cubes)  
         res.json(cubes)
       })
       .catch(err => {

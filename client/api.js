@@ -10,3 +10,16 @@ export function getCubes (callback) {
       callback(err, res.body)
     })
 }
+
+export function addCubeRating (cubeRating, callback) {
+  cubeRating.rating = Number(cubeRating.rating)
+  console.log('api',cubeRating)
+  request
+    .post(url+`/cubes/${cubeRating.cube_id}`)
+    .send(cubeRating)
+    .end((err, res) => {
+        callback(err)
+    })
+}
+
+

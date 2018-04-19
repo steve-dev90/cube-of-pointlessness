@@ -38,20 +38,21 @@ class Cube extends React.Component {
   
   render(props) {
     
-    var title = this.props.cubes
+    var cube = this.props.cubes
                   .find(cube => cube.id == this.props.match.params.id)
-                  .name
-    console.log('CUBES',title)  
+                  
+    console.log('CUBES',cube)  
     return ( 
       <React.Fragment>
-        <Header title={title} class={'header-section'} />
+        <Header title={cube.name} class={'header-section'} />
           <div className="cubecanvas">
             <div className="container">
               <div className="row">       
                 <div className="twelve columns">
                   <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}/>
                   <button onClick={this.rateCubeButton}> Rate Cube </button>
-                  {this.state.addRatingForm && <AddRating 
+                  {this.state.addRatingForm && <AddRating cube_id={cube.id} 
+                    refreshCubes={this.props.refreshCubes}
                     hideRatingForm={this.hideRatingForm}/>}
                 </div>
               </div>
