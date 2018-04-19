@@ -17,5 +17,23 @@ router.get('/', (req, res) => {
       })
   })
 
+//   router.post('/', (req, res) => {
+//     // console.log(req.body)
+
+//     var cubeRating = {
+//         'user_id': req.body.user_id,
+//         'cude_id': req.body.cube_id,
+//         'rating': req.body.rating
+//     }
+//     console.log('route-post', cubeRating)
+//     db.newRating(cubeRating)   
+//         .then(id => {
+//             console.log({id})
+//         })
+//         .catch(err => {
+//             console.log({err})
+//         })
+// }) 
+
 module.exports = router
 
