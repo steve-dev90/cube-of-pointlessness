@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn knex migrate:latest
+  /usr/local/bin/node /usr/local/bin/yarn knex run:seed
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
@@ -40,6 +40,7 @@ npm manifest:
       "babel-loader": "^7.1.2",
       "babel-preset-env": "^1.6.1",
       "babel-preset-react": "^6.24.1",
+      "body-parser": "^1.18.2",
       "express": "^4.16.2",
       "knex": "^0.14.6",
       "react": "^16.2.0",
@@ -829,7 +830,7 @@ Lockfile:
     version "4.11.8"
     resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   
-  body-parser@1.18.2:
+  body-parser@1.18.2, body-parser@^1.18.2:
     version "1.18.2"
     resolved "https://registry.yarnpkg.com/body-parser/-/body-parser-1.18.2.tgz#87678a19d84b47d859b83199bd59bce222b10454"
     dependencies:
@@ -4385,9 +4386,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 127
+  Exit code: 1
   Command: sh
-  Arguments: -c knex migrate:latest
+  Arguments: -c knex run:seed
   Directory: /Users/stevetorrens/workspace/cube-of-pointlessness
   Output:
   

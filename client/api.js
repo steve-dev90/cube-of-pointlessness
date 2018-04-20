@@ -18,8 +18,21 @@ export function getCubes (callback) {
 //     .post(url+`/cubes/${cubeRating.cube_id}`)
 //     .send(cubeRating)
 //     .end((err, res) => {
-//         callback(err)
+//         console.log('HeLLLOOOO')
+//         callback()
 //     })
 // }
 
-
+export function addCubeRating (cubeRating) {
+  cubeRating.rating = Number(cubeRating.rating)
+  console.log('api',cubeRating)
+  return request.post(url+`/cubes/${cubeRating.cube_id}`)
+    .send(cubeRating)
+    // .then(data => {
+    //   const returnedPost = data.body
+    //   return returnedPost
+    // })
+    .catch(err => {
+      throw Error('Cannot POST a new Post!')
+    })
+}

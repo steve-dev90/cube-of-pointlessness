@@ -24,7 +24,7 @@ class Cube extends React.Component {
   }
 
   rateCubeButton () {
-    console.log('heeeeloooo')
+    //console.log('heeeeloooo')
     this.setState({
       addRatingForm: true
     })
@@ -41,7 +41,7 @@ class Cube extends React.Component {
     var cube = this.props.cubes
                   .find(cube => cube.id == this.props.match.params.id)
                   
-    console.log('CUBES',cube)  
+    //console.log('CUBES',cube)  
     return ( 
       <React.Fragment>
         <Header title={cube.name} class={'header-section'} />

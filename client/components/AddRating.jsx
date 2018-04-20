@@ -1,6 +1,6 @@
 import React from 'react'
 
-import {addCubeRating} from '../api'
+import {addCubeRating,getCubes} from '../api'
 
 export default class AddRating extends React.Component {
   constructor (props) {
@@ -14,6 +14,7 @@ export default class AddRating extends React.Component {
     this.addRating = this.addRating.bind(this)
   }
 
+
   handleChange (e) {
     console.log(e.target.value)
     this.setState({
@@ -23,7 +24,14 @@ export default class AddRating extends React.Component {
 
   addRating (e) {
     //api call for DB goes here
-    addCubeRating(this.state, this.props.refreshCubes)
+    e.preventDefault()
+    console.log(this.state)
+    addCubeRating(this.state)
+      // .then(res => {
+      //   console.log("HELLOOOOO34")
+      //   this.props.refreshCubes()
+      // })
+      this.props.refreshCubes()
   }
 
   render () {

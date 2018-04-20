@@ -15,14 +15,16 @@ function getCubes2 () {
     .groupByRaw('cubes.id')     
 }
 
-// function newRating (cube_rating) {
-//   return knex('cubeRatings')
-//     .insert({'user_id': cube_rating.user_id, 'cube_id': cube_rating.cube_id, 
-//       'rating': cube_rating.rating })
-// }
+function newRating (cube_rating) {
+  //console.log('db',cube_rating.cube_id)
+  return knex('cubeRatings')
+    .insert({'user_id': cube_rating.user_id, 'cube_id': cube_rating.cube_id, 
+      'rating': cube_rating.rating })
+      
+}
 
 module.exports = {
     getCubes : getCubes,
     getCubes2 : getCubes2,
-    //newRating: newRating
+    newRating: newRating
 }

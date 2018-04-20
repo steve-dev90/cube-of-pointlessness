@@ -1603,6 +1603,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getCubes = getCubes;
+exports.addCubeRating = addCubeRating;
 
 var _superagent = __webpack_require__(79);
 
@@ -1626,9 +1627,23 @@ function getCubes(callback) {
 //     .post(url+`/cubes/${cubeRating.cube_id}`)
 //     .send(cubeRating)
 //     .end((err, res) => {
-//         callback(err)
+//         console.log('HeLLLOOOO')
+//         callback()
 //     })
 // }
+
+function addCubeRating(cubeRating) {
+  cubeRating.rating = Number(cubeRating.rating);
+  console.log('api', cubeRating);
+  return _superagent2.default.post(url + ('/cubes/' + cubeRating.cube_id)).send(cubeRating)
+  // .then(data => {
+  //   const returnedPost = data.body
+  //   return returnedPost
+  // })
+  .catch(function (err) {
+    throw Error('Cannot POST a new Post!');
+  });
+}
 
 /***/ }),
 /* 25 */
@@ -10907,7 +10922,7 @@ var Cube = function (_React$Component) {
   _createClass(Cube, [{
     key: 'rateCubeButton',
     value: function rateCubeButton() {
-      console.log('heeeeloooo');
+      //console.log('heeeeloooo')
       this.setState({
         addRatingForm: true
       });
@@ -10928,7 +10943,7 @@ var Cube = function (_React$Component) {
         return cube.id == _this2.props.match.params.id;
       });
 
-      console.log('CUBES', cube);
+      //console.log('CUBES',cube)  
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -82637,7 +82652,14 @@ var AddRating = function (_React$Component) {
     key: 'addRating',
     value: function addRating(e) {
       //api call for DB goes here
-      (0, _api.addCubeRating)(this.state, this.props.refreshCubes);
+      e.preventDefault();
+      console.log(this.state);
+      (0, _api.addCubeRating)(this.state);
+      // .then(res => {
+      //   console.log("HELLOOOOO34")
+      //   this.props.refreshCubes()
+      // })
+      this.props.refreshCubes();
     }
   }, {
     key: 'render',

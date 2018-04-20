@@ -1,15 +1,15 @@
 
 const express = require('express')
-//const bodyParser = require('body-parser')
+const bodyParser = require('body-parser')
 const router = express.Router()
-//router.use(bodyParser.json())
+router.use(bodyParser.json())
 
 const db = require('../db/db')
 
 router.get('/', (req, res) => {
     db.getCubes2()
       .then(cubes => {
-        console.log('router',cubes)  
+        //console.log('router',cubes)  
         res.json(cubes)
       })
       .catch(err => {
@@ -17,23 +17,26 @@ router.get('/', (req, res) => {
       })
   })
 
-//   router.post('/', (req, res) => {
-//     // console.log(req.body)
+  router.post('/:id', (req, res) => {
+    console.log('POST',req.body)
 
-//     var cubeRating = {
-//         'user_id': req.body.user_id,
-//         'cude_id': req.body.cube_id,
-//         'rating': req.body.rating
-//     }
-//     console.log('route-post', cubeRating)
-//     db.newRating(cubeRating)   
-//         .then(id => {
-//             console.log({id})
-//         })
-//         .catch(err => {
-//             console.log({err})
-//         })
-// }) 
+    var cubeRating = {
+        'user_id': req.body.user_id,
+        'cube_id': req.body.cube_id,
+        'rating': req.body.rating
+    }
+    //console.log('route-post', cubeRating.cube_id)
+    //console.log(typeof cubeRating[cube_id])
+    //console.log(cubeRating)
+
+    db.newRating(cubeRating)   
+        .then(id => {
+            console.log({id})
+        })
+        .catch(err => {
+            console.log({err})
+        })
+}) 
 
 module.exports = router
 
