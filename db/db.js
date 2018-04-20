@@ -4,8 +4,13 @@ const knex = require('knex')(config)
 
 
 function getCubes() {
-  console.log('DB called')
+  //console.log('DB called')
   return knex('cubes').select()
+}
+
+function getUsers() {
+  console.log('DB user called')
+  return knex('users').select()
 }
 
 function getCubes2 () {
@@ -26,5 +31,6 @@ function newRating (cube_rating) {
 module.exports = {
     getCubes : getCubes,
     getCubes2 : getCubes2,
-    newRating: newRating
+    newRating: newRating,
+    getUsers: getUsers
 }

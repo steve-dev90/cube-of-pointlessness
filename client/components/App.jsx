@@ -54,7 +54,7 @@ refreshUsers (err) {
   getUsers(this.renderUsers)
 }
 
-renderUsers (err, Users) {
+renderUsers (err, users) {
   console.log('app', users)
   this.setState({
     error: err,

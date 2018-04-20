@@ -10,7 +10,7 @@ export default class AddRating extends React.Component {
       cube_id: props.cube_id,
       rating: 1,
       name: "",
-      users: [{id: '551', name: 'Bob'}, {id: '552', name: 'Steve'}]
+      //users: [{id: '551', name: 'Bob'}, {id: '552', name: 'Steve'}]
     }
     this.handleChange = this.handleChange.bind(this)
     this.addRating = this.addRating.bind(this)
@@ -18,15 +18,26 @@ export default class AddRating extends React.Component {
 
 
   handleChange (e) {
-    console.log(e.target.value)
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    console.log(this.props.users)
+    if (e.target.name == 'name') {
+      var user_id2 = this.props.users
+        .find((user) => e.target.value == user.name)
+        .id
+      console.log(user_id2)                
+      this.setState({
+        user_id: user_id2
+      })      
+    } else {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+
   }
 
   addRating (e) {
     //api call for DB goes here
-    e.preventDefault()
+    e.preventDefault()              
     console.log(this.state)
     addCubeRating(this.state)
       // .then(res => {
@@ -41,12 +52,8 @@ export default class AddRating extends React.Component {
       <div >
         <form>
           <p>
-            {/* <input placeholder='User name' name='name'
-            onChange={this.handleChange}
-            value={this.state.name}
-            /> */}
             <select name='name' onChange={this.handleChange}>
-              {this.state.users.map(user => {
+              {this.props.users.map(user => {
                 return <option value={user.name}>{user.name}</option>
               })}
             </select>

@@ -1616,7 +1616,7 @@ var url = '/api';
 
 function getCubes(callback) {
   _superagent2.default.get(url + '/cubes').end(function (err, res) {
-    console.log('get', res.body);
+    //console.log('get', res.body)  
     callback(err, res.body);
   });
 }
@@ -2771,7 +2771,7 @@ var App = function (_React$Component) {
     }
   }, {
     key: 'renderUsers',
-    value: function renderUsers(err, Users) {
+    value: function renderUsers(err, users) {
       console.log('app', users);
       this.setState({
         error: err,
@@ -82661,8 +82661,8 @@ var AddRating = function (_React$Component) {
       user_id: 500,
       cube_id: props.cube_id,
       rating: 1,
-      name: "",
-      users: [{ id: '551', name: 'Bob' }, { id: '552', name: 'Steve' }]
+      name: ""
+      //users: [{id: '551', name: 'Bob'}, {id: '552', name: 'Steve'}]
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.addRating = _this.addRating.bind(_this);
@@ -82672,8 +82672,18 @@ var AddRating = function (_React$Component) {
   _createClass(AddRating, [{
     key: 'handleChange',
     value: function handleChange(e) {
-      console.log(e.target.value);
-      this.setState(_defineProperty({}, e.target.name, e.target.value));
+      console.log(this.props.users);
+      if (e.target.name == 'name') {
+        var user_id2 = this.props.users.find(function (user) {
+          return e.target.value == user.name;
+        }).id;
+        console.log(user_id2);
+        this.setState({
+          user_id: user_id2
+        });
+      } else {
+        this.setState(_defineProperty({}, e.target.name, e.target.value));
+      }
     }
   }, {
     key: 'addRating',
@@ -82703,7 +82713,7 @@ var AddRating = function (_React$Component) {
             _react2.default.createElement(
               'select',
               { name: 'name', onChange: this.handleChange },
-              this.state.users.map(function (user) {
+              this.props.users.map(function (user) {
                 return _react2.default.createElement(
                   'option',
                   { value: user.name },

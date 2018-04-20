@@ -7,9 +7,9 @@ router.use(bodyParser.json())
 const db = require('../db/db')
 
 router.get('/', (req, res) => {
-    db.getUser()
+    db.getUsers()
       .then(users => {
-        //console.log('router',users)  
+        console.log('router',users)  
         res.json(users)
       })
       .catch(err => {
