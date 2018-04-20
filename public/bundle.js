@@ -10830,7 +10830,7 @@ var CubeNav = function (_React$Component) {
 
             return _react2.default.createElement(
               'div',
-              { className: 'row' },
+              { className: 'row', key: cube.id },
               _react2.default.createElement(
                 'div',
                 { className: 'one-third column value' },
@@ -82658,7 +82658,7 @@ var AddRating = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (AddRating.__proto__ || Object.getPrototypeOf(AddRating)).call(this, props));
 
     _this.state = {
-      user_id: 500,
+      user_id: _this.props.users[0].id,
       cube_id: props.cube_id,
       rating: 1,
       name: ""
@@ -82674,6 +82674,8 @@ var AddRating = function (_React$Component) {
     value: function handleChange(e) {
       console.log(this.props.users);
       if (e.target.name == 'name') {
+        //console.log(e.target.value,this.props.users[0].name)
+        //if (e.target.value == "" ) {e.target.value = this.props.users[0].name}
         var user_id2 = this.props.users.find(function (user) {
           return e.target.value == user.name;
         }).id;
@@ -82697,6 +82699,7 @@ var AddRating = function (_React$Component) {
       //   this.props.refreshCubes()
       // })
       this.props.refreshCubes();
+      this.props.hideRatingForm();
     }
   }, {
     key: 'render',
@@ -82716,7 +82719,7 @@ var AddRating = function (_React$Component) {
               this.props.users.map(function (user) {
                 return _react2.default.createElement(
                   'option',
-                  { value: user.name },
+                  { key: user.id, value: user.name },
                   user.name
                 );
               })

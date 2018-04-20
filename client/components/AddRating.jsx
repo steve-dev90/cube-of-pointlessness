@@ -6,7 +6,7 @@ export default class AddRating extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      user_id: 500,
+      user_id: this.props.users[0].id,
       cube_id: props.cube_id,
       rating: 1,
       name: "",
@@ -20,6 +20,8 @@ export default class AddRating extends React.Component {
   handleChange (e) {
     console.log(this.props.users)
     if (e.target.name == 'name') {
+      //console.log(e.target.value,this.props.users[0].name)
+      //if (e.target.value == "" ) {e.target.value = this.props.users[0].name}
       var user_id2 = this.props.users
         .find((user) => e.target.value == user.name)
         .id
@@ -45,6 +47,7 @@ export default class AddRating extends React.Component {
       //   this.props.refreshCubes()
       // })
     this.props.refreshCubes()
+    this.props.hideRatingForm()
   }
 
   render () {
@@ -54,7 +57,7 @@ export default class AddRating extends React.Component {
           <p>
             <select name='name' onChange={this.handleChange}>
               {this.props.users.map(user => {
-                return <option value={user.name}>{user.name}</option>
+                return <option key={user.id} value={user.name}>{user.name}</option>
               })}
             </select>
           </p>

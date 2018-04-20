@@ -24,7 +24,7 @@ class CubeNav extends React.Component {
           {this.props.cubes.map((cube) => {
             
             return (
-              <div className ="row">
+              <div className ="row" key={cube.id}>
                 <div className="one-third column value">
                 <a href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"/></a>
                 </div>
