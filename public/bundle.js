@@ -1603,6 +1603,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getCubes = getCubes;
+exports.getUsers = getUsers;
 exports.addCubeRating = addCubeRating;
 
 var _superagent = __webpack_require__(79);
@@ -1620,17 +1621,13 @@ function getCubes(callback) {
   });
 }
 
-// export function addCubeRating (cubeRating, callback) {
-//   cubeRating.rating = Number(cubeRating.rating)
-//   console.log('api',cubeRating)
-//   request
-//     .post(url+`/cubes/${cubeRating.cube_id}`)
-//     .send(cubeRating)
-//     .end((err, res) => {
-//         console.log('HeLLLOOOO')
-//         callback()
-//     })
-// }
+function getUsers(callback) {
+  console.log('getusers');
+  _superagent2.default.get(url + '/users').end(function (err, res) {
+    console.log('get', res.body);
+    callback(err, res.body);
+  });
+}
 
 function addCubeRating(cubeRating) {
   cubeRating.rating = Number(cubeRating.rating);
@@ -2723,11 +2720,14 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
     _this.state = {
-      cubes: []
+      cubes: [],
+      users: []
     };
 
     _this.refreshCubes = _this.refreshCubes.bind(_this);
     _this.renderCubes = _this.renderCubes.bind(_this);
+    _this.refreshUsers = _this.refreshUsers.bind(_this);
+    _this.renderUsers = _this.renderUsers.bind(_this);
 
     return _this;
   }
@@ -2736,7 +2736,11 @@ var App = function (_React$Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.refreshCubes();
+      this.refreshUsers();
     }
+
+    //Get cubes from DB
+
   }, {
     key: 'refreshCubes',
     value: function refreshCubes(err) {
@@ -2748,10 +2752,30 @@ var App = function (_React$Component) {
   }, {
     key: 'renderCubes',
     value: function renderCubes(err, cubes) {
-      console.log('cubenav', cubes);
+      //console.log('cube',cubes)
       this.setState({
         error: err,
         cubes: cubes || []
+      });
+    }
+
+    //Get users from DB
+
+  }, {
+    key: 'refreshUsers',
+    value: function refreshUsers(err) {
+      this.setState({
+        error: err
+      });
+      (0, _api.getUsers)(this.renderUsers);
+    }
+  }, {
+    key: 'renderUsers',
+    value: function renderUsers(err, Users) {
+      console.log('app', users);
+      this.setState({
+        error: err,
+        users: users || []
       });
     }
   }, {
@@ -2773,8 +2797,8 @@ var App = function (_React$Component) {
               return _react2.default.createElement(_SelectCube2.default, _extends({ cubes: _this2.state.cubes }, props));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes/:id', render: function render(props) {
-              return _react2.default.createElement(_Cube2.default, _extends({ cubes: _this2.state.cubes, refreshCubes: _this2.refreshCubes
-              }, props));
+              return _react2.default.createElement(_Cube2.default, _extends({ cubes: _this2.state.cubes, refreshCubes: _this2.refreshCubes,
+                users: _this2.state.users }, props));
             } })
         )
       );
@@ -10968,7 +10992,8 @@ var Cube = function (_React$Component) {
                 ),
                 this.state.addRatingForm && _react2.default.createElement(_AddRating2.default, { cube_id: cube.id,
                   refreshCubes: this.props.refreshCubes,
-                  hideRatingForm: this.hideRatingForm })
+                  hideRatingForm: this.hideRatingForm,
+                  users: this.props.users })
               )
             )
           )
@@ -82635,7 +82660,9 @@ var AddRating = function (_React$Component) {
     _this.state = {
       user_id: 500,
       cube_id: props.cube_id,
-      rating: 1
+      rating: 1,
+      name: "",
+      users: [{ id: '551', name: 'Bob' }, { id: '552', name: 'Steve' }]
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.addRating = _this.addRating.bind(_this);
@@ -82673,17 +82700,24 @@ var AddRating = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement('input', { placeholder: 'User name', name: 'name',
-              onChange: this.handleChange,
-              value: this.state.name
-            })
+            _react2.default.createElement(
+              'select',
+              { name: 'name', onChange: this.handleChange },
+              this.state.users.map(function (user) {
+                return _react2.default.createElement(
+                  'option',
+                  { value: user.name },
+                  user.name
+                );
+              })
+            )
           ),
           _react2.default.createElement(
             'p',
             null,
             _react2.default.createElement('input', { placeholder: 'Rating', name: 'rating',
               onChange: this.handleChange,
-              value: this.state.cube_rating
+              value: this.state.rating
             })
           ),
           _react2.default.createElement(

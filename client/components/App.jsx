@@ -1,6 +1,6 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
-import {getCubes} from '../api'
+import {getCubes, getUsers} from '../api'
 
 
 import Header from './Header'
@@ -15,18 +15,22 @@ class App extends React.Component {
 
     this.state = {
       cubes: [],
+      users: []
     }
 
     this.refreshCubes = this.refreshCubes.bind(this)
     this.renderCubes = this.renderCubes.bind(this)
-
+    this.refreshUsers = this.refreshUsers.bind(this)
+    this.renderUsers = this.renderUsers.bind(this)
 
   }  
 
   componentDidMount () {
     this.refreshCubes()
+    this.refreshUsers()
   }
 
+//Get cubes from DB
   refreshCubes (err) {
     this.setState({
       error: err,
@@ -35,12 +39,28 @@ class App extends React.Component {
   }
 
   renderCubes (err, cubes) {
-    console.log('cubenav',cubes)
+    //console.log('cube',cubes)
     this.setState({
       error: err,
       cubes: cubes || []
     })
   }
+
+//Get users from DB
+refreshUsers (err) {
+  this.setState({
+    error: err,
+  })
+  getUsers(this.renderUsers)
+}
+
+renderUsers (err, Users) {
+  console.log('app', users)
+  this.setState({
+    error: err,
+    users: users || []
+  })
+}    
 
   render() {
     return (
@@ -54,10 +74,10 @@ class App extends React.Component {
           <Route exact path='/cubes' render={(props) => {
             return <SelectCube cubes={this.state.cubes} {...props} />
           }} />
-          {/* Don't understand this - see https://til.hashrocket.com/posts/z8cimdpghg-passing-props-down-to-react-router-route */}
+          
           <Route exact path='/cubes/:id' render={(props) => {
             return <Cube cubes={this.state.cubes} refreshCubes={this.refreshCubes} 
-            {...props} />
+            users={this.state.users} {...props} />
           }} />
 
         </React.Fragment>  

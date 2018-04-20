@@ -52,8 +52,9 @@ class Cube extends React.Component {
                   <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}/>
                   <button onClick={this.rateCubeButton}> Rate Cube </button>
                   {this.state.addRatingForm && <AddRating cube_id={cube.id} 
-                    refreshCubes={this.props.refreshCubes}
-                    hideRatingForm={this.hideRatingForm}/>}
+                    refreshCubes={this.props.refreshCubes} 
+                    hideRatingForm={this.hideRatingForm}
+                    users={this.props.users}/>}
                 </div>
               </div>
             </div> 

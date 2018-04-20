@@ -15,9 +15,21 @@ router.get('/', (req, res) => {
       .catch(err => {
         res.status(500).send('DATABASE ERROR: ' + err.message)
       })
-  })
+})
 
-  router.post('/:id', (req, res) => {
+// router.get('/', (req, res) => {
+//     db.getCubes2()
+//       .then(cubes => {
+//         //console.log('router',cubes)  
+//         res.json(cubes)
+//       })
+//       .catch(err => {
+//         res.status(500).send('DATABASE ERROR: ' + err.message)
+//       })
+// })
+
+
+router.post('/:id', (req, res) => {
     console.log('POST',req.body)
 
     var cubeRating = {
