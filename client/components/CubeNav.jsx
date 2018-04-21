@@ -1,6 +1,7 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
 import {getCubesByUserId} from '../api'
+import AllCubesNav from './AllCubesNav';
 
 
 class CubeNav extends React.Component {
@@ -10,7 +11,8 @@ class CubeNav extends React.Component {
     super(props)
 
     this.state = {
-      cubesByUserID: []
+      cubesByUserID: [],
+      displayRatingsForAllUsers: true
     }
 
     this.selectUserButton = this.selectUserButton.bind(this)
@@ -18,13 +20,8 @@ class CubeNav extends React.Component {
     this.renderCubesByUserId = this.renderCubesByUserId.bind(this)
   }
 
-  // componentDidMount() {
-  //   this.refreshCubesByUserId()
-  // }  
-
-//Get cubes from DB
   refreshCubesByUserId (id, err) {
-    console.log('refresh',id)
+    //console.log('refresh',id)
     this.setState({
       error: err,
     })
@@ -40,12 +37,21 @@ class CubeNav extends React.Component {
   }
 
   selectUserButton (e) {
-    var user_id = this.props.users
-      .find((user) => e.target.value == user.name)
-      .id
-    console.log('Basvjd',user_id)                
-    this.refreshCubesByUserId(user_id)
-    console.log(this.state)
+    if (e.target.value == 'all users') {
+      this.setState({
+        displayRatingsForAllUsers : true
+      })
+    } else {
+      this.setState({
+        displayRatingsForAllUsers : false
+      })
+      var user_id = this.props.users
+        .find((user) => e.target.value == user.name)
+        .id
+      console.log('User',user_id)                
+      this.refreshCubesByUserId(user_id)
+      console.log(this.state)
+    }
   }
 
   render(props) {
@@ -54,36 +60,19 @@ class CubeNav extends React.Component {
       <div className="list-cubes">
         <div className="container">
 
-          {this.props.cubes.map((cube) => {
-            
-            return (
-              <div className ="row" key={cube.id}>
-                <div className="one-third column value">
-                <a href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"/></a>
-                </div>
-                <div className="one-third column value">
-                  <Link to={`/cubes/${cube.id}`}><h3>{cube.name}</h3></ Link> 
-                </div>
-                <div className="one-third column value">
-                  <h3>{cube.rating}</h3>
-                </div> 
-            </div> 
-            )    
-          })}
+        <AllCubesNav cubes={this.props.cubes} 
+          cubesByUserID={this.state.cubesByUserID} 
+          displayRatingsForAllUsers={this.state.displayRatingsForAllUsers} />
 
         <div className ="row">
-          {/* <button onClick ={this.selectUserButton}>Test button</ button>  */}
           <form>
-          <p>
             <select name='name' onChange={this.selectUserButton}>
-              
+              <option value='all users'>Rating for all users</option>
               {this.props.users.map(user => {
-                return <option key={user.id} value={user.name}>{user.name}</option>
+                return <option key={user.id} value={user.name}>Rating for {user.name}</option>
               })}
             </select>
-          </p>
-
-        </form> 
+          </form> 
         </div>
 
         </div> 
