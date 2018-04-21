@@ -11,12 +11,23 @@ export function getCubes (callback) {
     })
 }
 
+export function getCubesByUserId (callback, id) {
+  //var u = url+'/cubes/'
+  console.log('api',id)
+  request
+    .get(url+'/cubes/'+id)
+    .end((err, res) => {
+      //console.log('get', res.body)  
+      callback(err, res.body)
+    })
+}
+
 export function getUsers (callback) {
-  console.log('getusers')
+  //console.log('getusers')
   request
     .get(url+'/users')
     .end((err, res) => {
-      console.log('get', res.body)  
+      //console.log('get', res.body)  
       callback(err, res.body)
     })
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
-import {getCubes, getUsers} from '../api'
+import {getCubes, getUsers, getCubesByUserID} from '../api'
 
 
 import Header from './Header'
@@ -39,7 +39,7 @@ class App extends React.Component {
   }
 
   renderCubes (err, cubes) {
-    //console.log('cube',cubes)
+    console.log('cube',cubes)
     this.setState({
       error: err,
       cubes: cubes || []
@@ -55,7 +55,7 @@ refreshUsers (err) {
 }
 
 renderUsers (err, users) {
-  console.log('app', users)
+  //console.log('app', users)
   this.setState({
     error: err,
     users: users || []
@@ -72,7 +72,8 @@ renderUsers (err, users) {
           <Route exact path='/' component={WelcomeNav}/>
 
           <Route exact path='/cubes' render={(props) => {
-            return <SelectCube cubes={this.state.cubes} {...props} />
+            return <SelectCube cubes={this.state.cubes}
+              users={this.state.users} {...props} />
           }} />
           
           <Route exact path='/cubes/:id' render={(props) => {

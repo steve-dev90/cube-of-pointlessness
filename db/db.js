@@ -20,6 +20,15 @@ function getCubes2 () {
     .groupByRaw('cubes.id')     
 }
 
+function getCubesByUserId (user_id) {
+  console.log('db', user_id)
+  return knex('cubes')
+    .select('cubes.id','cubes.name', 'cubes.image', knex.raw("AVG(cubeRatings.rating) as rating"))
+    .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
+    .where('cubeRatings.user_id', user_id)
+    .groupByRaw('cubes.id')     
+}
+
 function newRating (cube_rating) {
   //console.log('db',cube_rating.cube_id)
   return knex('cubeRatings')
@@ -32,5 +41,6 @@ module.exports = {
     getCubes : getCubes,
     getCubes2 : getCubes2,
     newRating: newRating,
-    getUsers: getUsers
+    getUsers: getUsers,
+    getCubesByUserId: getCubesByUserId
 }

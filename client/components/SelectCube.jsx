@@ -9,7 +9,7 @@ const SelectCube = (props) => {
   return (
     <React.Fragment>
       <Header title={'Select a cube'} class={'header-section'} />
-      <CubeNav cubes={props.cubes} />
+      <CubeNav cubes={props.cubes} users={props.users}/>
       <Footer />
     </React.Fragment>
   )

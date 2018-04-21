@@ -1,6 +1,6 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
-import {getCubes} from '../api'
+import {getCubesByUserId} from '../api'
 
 
 class CubeNav extends React.Component {
@@ -10,9 +10,42 @@ class CubeNav extends React.Component {
     super(props)
 
     this.state = {
-      cubes: []
+      cubesByUserID: []
     }
 
+    this.selectUserButton = this.selectUserButton.bind(this)
+    this.refreshCubesByUserId = this.refreshCubesByUserId.bind(this)
+    this.renderCubesByUserId = this.renderCubesByUserId.bind(this)
+  }
+
+  // componentDidMount() {
+  //   this.refreshCubesByUserId()
+  // }  
+
+//Get cubes from DB
+  refreshCubesByUserId (id, err) {
+    console.log('refresh',id)
+    this.setState({
+      error: err,
+    })
+    getCubesByUserId(this.renderCubesByUserId, id)
+  }
+
+  renderCubesByUserId (err, cubes) {
+    console.log('cubeID',cubes)
+    this.setState({
+      error: err,
+      cubesByUserID: cubes || []
+    })
+  }
+
+  selectUserButton (e) {
+    var user_id = this.props.users
+      .find((user) => e.target.value == user.name)
+      .id
+    console.log('Basvjd',user_id)                
+    this.refreshCubesByUserId(user_id)
+    console.log(this.state)
   }
 
   render(props) {
@@ -37,6 +70,21 @@ class CubeNav extends React.Component {
             </div> 
             )    
           })}
+
+        <div className ="row">
+          {/* <button onClick ={this.selectUserButton}>Test button</ button>  */}
+          <form>
+          <p>
+            <select name='name' onChange={this.selectUserButton}>
+              
+              {this.props.users.map(user => {
+                return <option key={user.id} value={user.name}>{user.name}</option>
+              })}
+            </select>
+          </p>
+
+        </form> 
+        </div>
 
         </div> 
       </div> 

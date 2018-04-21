@@ -17,17 +17,17 @@ router.get('/', (req, res) => {
       })
 })
 
-// router.get('/', (req, res) => {
-//     db.getCubes2()
-//       .then(cubes => {
-//         //console.log('router',cubes)  
-//         res.json(cubes)
-//       })
-//       .catch(err => {
-//         res.status(500).send('DATABASE ERROR: ' + err.message)
-//       })
-// })
-
+router.get('/:id', (req, res) => {
+    console.log('router',req.params.id)
+    db.getCubesByUserId(Number(req.params.id))
+      .then(cubes => {
+        console.log('router',cubes)  
+        res.json(cubes)
+      })
+      .catch(err => {
+        res.status(500).send('DATABASE ERROR: ' + err.message)
+      })
+})
 
 router.post('/:id', (req, res) => {
     console.log('POST',req.body)

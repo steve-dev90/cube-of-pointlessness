@@ -1603,6 +1603,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getCubes = getCubes;
+exports.getCubesByUserId = getCubesByUserId;
 exports.getUsers = getUsers;
 exports.addCubeRating = addCubeRating;
 
@@ -1621,10 +1622,19 @@ function getCubes(callback) {
   });
 }
 
+function getCubesByUserId(callback, id) {
+  //var u = url+'/cubes/'
+  console.log('api', id);
+  _superagent2.default.get(url + '/cubes/' + id).end(function (err, res) {
+    //console.log('get', res.body)  
+    callback(err, res.body);
+  });
+}
+
 function getUsers(callback) {
-  console.log('getusers');
+  //console.log('getusers')
   _superagent2.default.get(url + '/users').end(function (err, res) {
-    console.log('get', res.body);
+    //console.log('get', res.body)  
     callback(err, res.body);
   });
 }
@@ -2752,7 +2762,7 @@ var App = function (_React$Component) {
   }, {
     key: 'renderCubes',
     value: function renderCubes(err, cubes) {
-      //console.log('cube',cubes)
+      console.log('cube', cubes);
       this.setState({
         error: err,
         cubes: cubes || []
@@ -2772,7 +2782,7 @@ var App = function (_React$Component) {
   }, {
     key: 'renderUsers',
     value: function renderUsers(err, users) {
-      console.log('app', users);
+      //console.log('app', users)
       this.setState({
         error: err,
         users: users || []
@@ -2794,7 +2804,8 @@ var App = function (_React$Component) {
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _WelcomeNav2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes', render: function render(props) {
-              return _react2.default.createElement(_SelectCube2.default, _extends({ cubes: _this2.state.cubes }, props));
+              return _react2.default.createElement(_SelectCube2.default, _extends({ cubes: _this2.state.cubes,
+                users: _this2.state.users }, props));
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes/:id', render: function render(props) {
               return _react2.default.createElement(_Cube2.default, _extends({ cubes: _this2.state.cubes, refreshCubes: _this2.refreshCubes,
@@ -10763,7 +10774,7 @@ var SelectCube = function SelectCube(props) {
     _react2.default.Fragment,
     null,
     _react2.default.createElement(_Header2.default, { title: 'Select a cube', 'class': 'header-section' }),
-    _react2.default.createElement(_CubeNav2.default, { cubes: props.cubes }),
+    _react2.default.createElement(_CubeNav2.default, { cubes: props.cubes, users: props.users }),
     _react2.default.createElement(_Footer2.default, null)
   );
 };
@@ -10810,13 +10821,51 @@ var CubeNav = function (_React$Component) {
 
 
     _this.state = {
-      cubes: []
+      cubesByUserID: []
     };
 
+    _this.selectUserButton = _this.selectUserButton.bind(_this);
+    _this.refreshCubesByUserId = _this.refreshCubesByUserId.bind(_this);
+    _this.renderCubesByUserId = _this.renderCubesByUserId.bind(_this);
     return _this;
   }
 
+  // componentDidMount() {
+  //   this.refreshCubesByUserId()
+  // }  
+
+  //Get cubes from DB
+
+
   _createClass(CubeNav, [{
+    key: 'refreshCubesByUserId',
+    value: function refreshCubesByUserId(id, err) {
+      console.log('refresh', id);
+      this.setState({
+        error: err
+      });
+      (0, _api.getCubesByUserId)(this.renderCubesByUserId, id);
+    }
+  }, {
+    key: 'renderCubesByUserId',
+    value: function renderCubesByUserId(err, cubes) {
+      console.log('cubeID', cubes);
+      this.setState({
+        error: err,
+        cubesByUserID: cubes || []
+      });
+    }
+  }, {
+    key: 'selectUserButton',
+    value: function selectUserButton(e) {
+      var user_id = this.props.users.find(function (user) {
+        return e.target.value == user.name;
+      }).id;
+      console.log('Basvjd', user_id);
+      this.refreshCubesByUserId(user_id);
+      console.log(this.state);
+    }
+  }, {
     key: 'render',
     value: function render(props) {
       //console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
@@ -10863,7 +10912,30 @@ var CubeNav = function (_React$Component) {
                 )
               )
             );
-          })
+          }),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'form',
+              null,
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement(
+                  'select',
+                  { name: 'name', onChange: this.selectUserButton },
+                  this.props.users.map(function (user) {
+                    return _react2.default.createElement(
+                      'option',
+                      { key: user.id, value: user.name },
+                      user.name
+                    );
+                  })
+                )
+              )
+            )
+          )
         )
       );
     }
