@@ -4,7 +4,7 @@ import 'p5/lib/addons/p5.sound'
 function sketch (p) {
 
   //window.myp5 = p5;
-  var song
+  var song, analyzer
 
   p.preload = function () {
     song = p.loadSound('/sounds/sound1.wav')
@@ -17,7 +17,7 @@ function sketch (p) {
     song.loop()
 
     // create a new Amplitude analyzer
-    analyzer = new p.p5.Amplitude()
+    analyzer = new p5.Amplitude()
 
     // Patch the input to an volume analyzer
     analyzer.setInput(song);
@@ -58,7 +58,7 @@ function sketch (p) {
     //p.noStroke()
     
     var rms = analyzer.getLevel();
-    p.box(5 + rms*100)
+    p.box(20 + rms*300)
 
   }
 }
