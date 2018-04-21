@@ -24,13 +24,13 @@ export default class UserRegistration extends React.Component {
   }
 
   addUser (e) {
-    //api call for DB goes here
     e.preventDefault()              
     console.log(this.state)
     addUser(this.state)
     this.props.refreshUsers()
-    document.getElementById('userform').reset()
-    document.getElementById('email').reset()
+    //This resets the form so that the same placeholder's are displayed after reset
+    this.refs.nameInput.value = 'Your name'
+    this.refs.emailInput.value = "example@mailbox.com"
   }
 
   render () {
@@ -45,13 +45,13 @@ export default class UserRegistration extends React.Component {
               <div className="six columns" >
                 <label >Name</label>
                 <input className="u-full-width" name='name' placeholder='Your name' 
-                  onChange={this.handleChange} id='name-input'/>
+                  onChange={this.handleChange} ref='nameInput'/>
               </div>
               <div className="six columns" >
                 <label >Your email</label>
                 <input className="u-full-width" name='email' 
-                  placeholder="test@mailbox.com" onChange={this.handleChange}
-                    id='email'/>
+                  placeholder="example@mailbox.com" onChange={this.handleChange}
+                    ref='emailInput'/>
               </div>
             </div>
 
@@ -66,24 +66,6 @@ export default class UserRegistration extends React.Component {
         
         </div> 
 
-      {/* <div >
-
-        <form>
-          <p>
-            <select name='name' onChange={this.handleChange}>
-              {this.props.users.map(user => {
-                return <option key={user.id} value={user.name}>{user.name}</option>
-              })}
-            </select>
-          </p>
-          <p><input placeholder='Rating' name='rating'
-            onChange={this.handleChange}
-            value={this.state.rating}
-          /></p>
-          <button type='button' onClick={this.addRating}>Add your rating</button>
-          <button type='button' onClick={this.props.hideRatingForm}>Cancel</button>
-
-        </form> */}
         <Footer />
       </React.Fragment>
     )

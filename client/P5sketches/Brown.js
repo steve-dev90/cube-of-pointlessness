@@ -1,10 +1,26 @@
-
+import p5 from 'p5'
+import 'p5/lib/addons/p5.sound'
 
 function sketch (p) {
- 
+
+  //window.myp5 = p5;
+  var song
+
+  p.preload = function () {
+    song = p.loadSound('/sounds/sound1.wav')
+  }  
+
   p.setup = function () {
     p.createCanvas(600, 600, p.WEBGL);
     var x = 0 //does this centre the cube?
+    
+    song.loop()
+
+    // create a new Amplitude analyzer
+    analyzer = new p.p5.Amplitude()
+
+    // Patch the input to an volume analyzer
+    analyzer.setInput(song);
 
   };
   
@@ -41,7 +57,8 @@ function sketch (p) {
     p.specularMaterial(204, 102, 0, 50);
     //p.noStroke()
     
-    p.box(50)
+    var rms = analyzer.getLevel();
+    p.box(5 + rms*100)
 
   }
 }

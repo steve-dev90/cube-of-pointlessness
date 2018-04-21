@@ -5,7 +5,7 @@ const AllCubesNav = (props) => {
 
   var cubesToShow = props.displayRatingsForAllUsers ? 
     props.cubes : props.cubesByUserID     
-  console.log({cubesToShow})     
+  //console.log({cubesToShow})     
   return (
     <React.Fragment>
       {cubesToShow.map((cube) => {

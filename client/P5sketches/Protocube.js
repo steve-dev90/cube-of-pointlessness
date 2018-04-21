@@ -6,13 +6,25 @@ function sketch (p) {
     p.createCanvas(600, 600, p.WEBGL);
   };
  
- 
+  //Initial cube speed
+  var speed = 0.005
+  //console.log('P5 brown', props.speed)
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    //If props.cubeSpeed is not null then assign to speed
+    if (props.cubeSpeed) {
+      console.log('P5 brown', props)
+      speed = props.cubeSpeed
+    }
+  }
+
   p.draw = function () {
 
     p.background(250)
     p.rotateY(p.frameCount * 0.01)
+
+    //var speed = 0.005
       
-    p.translate(p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005) * 100, p.sin(p.frameCount * 0.005));
+    p.translate(p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed));
     p.rotateZ(p.frameCount * 0.02)
        
     p.specularMaterial('red')

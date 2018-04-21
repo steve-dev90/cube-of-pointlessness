@@ -15,11 +15,14 @@ class Cube extends React.Component {
     this.state = {
       addRatingForm: false,
       sketch: {661: sketch_1, 662: sketch_2, 663: sketch_2},
-      //sketch_id: (props.match.params.id-1)
+      cubeSpeed: 0,
+      cubeEffectToggle: false
+
     }
 
     this.rateCubeButton = this.rateCubeButton.bind(this)
     this.hideRatingForm = this.hideRatingForm.bind(this)
+    this.addCubeEffect = this.addCubeEffect.bind(this)
 
   }
 
@@ -35,6 +38,16 @@ class Cube extends React.Component {
       addRatingForm: false
     })  
   }
+
+  addCubeEffect () {
+    var cubeEffectToggle = !(this.state.cubeEffectToggle)
+    console.log(cubeEffectToggle)
+    cubeEffectToggle 
+    ?
+    this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle  }) 
+    : 
+    this.setState({ cubeSpeed: 0.005, cubeEffectToggle: cubeEffectToggle })    
+  }
   
   render(props) {
     
@@ -49,12 +62,18 @@ class Cube extends React.Component {
             <div className="container">
               <div className="row">       
                 <div className="twelve columns">
-                  <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}/>
+                  <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}
+                    cubeSpeed={this.state.cubeSpeed}/>
+                  
                   <button onClick={this.rateCubeButton}> Rate Cube </button>
+
                   {this.state.addRatingForm && <AddRating cube_id={cube.id} 
                     refreshCubes={this.props.refreshCubes} 
                     hideRatingForm={this.hideRatingForm}
                     users={this.props.users}/>}
+
+                  <button onClick={this.addCubeEffect}> +/- Effect </button>  
+
                 </div>
               </div>
             </div> 
