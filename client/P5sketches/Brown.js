@@ -1,10 +1,12 @@
+//Import the p5.js sound library
 import p5 from 'p5'
 import 'p5/lib/addons/p5.sound'
 
 function sketch (p) {
 
-  //window.myp5 = p5;
   var song, analyzer
+  var vector = [0,0,0]
+  var soundControl = false
 
   p.preload = function () {
     song = p.loadSound('/sounds/sound1.wav')
@@ -12,22 +14,34 @@ function sketch (p) {
 
   p.setup = function () {
     p.createCanvas(600, 600, p.WEBGL);
-    var x = 0 //does this centre the cube?
     
-    song.loop()
-
     // create a new Amplitude analyzer
     analyzer = new p5.Amplitude()
 
     // Patch the input to an volume analyzer
     analyzer.setInput(song);
 
-  };
+  }
   
-  var vector = [0,0,0]
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    //If props.cubeSpeed is not null then assign to speed
+    if (props.soundControl) {
+      console.log('P5 brown', props)
+      soundControl = props.soundControl
+    }
+  }
 
   p.draw = function () {
 
+    console.log(soundControl)
+    if (soundControl) {
+      song.play()
+    } else {
+      console.log('checking')
+      song.stop()
+    }
+
+    //Limit the travel of the cube
     var limits = [p.width/2, p.height/2, 200]
 
     vector = vector.map((i, v) => {
@@ -39,31 +53,27 @@ function sketch (p) {
         return i += p.random(-3, 3)
       }
     })
-    
-    //console.log('x',vector)
 
     p.background(250)
     
     p.rotateZ(p.frameCount * 0.02)  
     p.translate(vector[0], vector[1], vector[2]); //Should go first
     p.rotateX(p.frameCount * 0.02)
-    p.rotateY(p.frameCount * 0.01)   
+    p.rotateY(p.frameCount * 0.01)  
+
     p.specularMaterial('red')
 
     var c1 = p.frameCount % 255
-
     p.ambientLight(100);
     p.pointLight(c1, 250, 250, 100, 100, 0);
     p.specularMaterial(204, 102, 0, 50);
-    //p.noStroke()
     
+    //Get amplitude and vary cube size by amplitude
     var rms = analyzer.getLevel();
-    p.box(20 + rms*300)
+    p.box(20 + rms*100)
 
   }
 }
-
-
 
 
 export default sketch

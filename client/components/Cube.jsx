@@ -16,7 +16,8 @@ class Cube extends React.Component {
       addRatingForm: false,
       sketch: {661: sketch_1, 662: sketch_2, 663: sketch_2},
       cubeSpeed: 0,
-      cubeEffectToggle: false
+      cubeEffectToggle: false,
+      soundControl: false
 
     }
 
@@ -44,9 +45,11 @@ class Cube extends React.Component {
     console.log(cubeEffectToggle)
     cubeEffectToggle 
     ?
-    this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle  }) 
+    this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle,
+      soundControl: true }) 
     : 
-    this.setState({ cubeSpeed: 0.005, cubeEffectToggle: cubeEffectToggle })    
+    this.setState({ cubeSpeed: 0.005, cubeEffectToggle: cubeEffectToggle,
+      soundControl: false })    
   }
   
   render(props) {
@@ -63,7 +66,7 @@ class Cube extends React.Component {
               <div className="row">       
                 <div className="twelve columns">
                   <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}
-                    cubeSpeed={this.state.cubeSpeed}/>
+                    cubeSpeed={this.state.cubeSpeed} soundControl={this.state.soundControl}/>
                   
                   <button onClick={this.rateCubeButton}> Rate Cube </button>
 
