@@ -1,7 +1,10 @@
 //const path = require('path')
-const config = require('../knexfile').development
-const knex = require('knex')(config)
+// const config = require('../knexfile').development
+// const knex = require('knex')(config)
 
+const environment = process.env.NODE_ENV || 'development'
+const config = require('../knexfile')[environment]
+const knex = require('knex')(config)
 
 function getCubes() {
   //console.log('DB called')

@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server",
     "dev": "node server & webpack --watch",
-    "postinstall": "webpack",
+    "postinstall": "webpack && knex migrate:latest",
     "knex": "knex"
   },
   "babel": {
@@ -27,6 +27,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "knex": "^0.14.6",
+    "pg": "^7.4.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-p5-wrapper": "^0.0.4",

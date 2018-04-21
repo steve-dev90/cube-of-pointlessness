@@ -82509,7 +82509,7 @@ var Cube = function (_React$Component) {
     key: 'addCubeEffect',
     value: function addCubeEffect() {
       var cubeEffectToggle = !this.state.cubeEffectToggle;
-      console.log(cubeEffectToggle);
+      //console.log(soundControl)
       cubeEffectToggle ? this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle,
         soundControl: true }) : this.setState({ cubeSpeed: 0.005, cubeEffectToggle: cubeEffectToggle,
         soundControl: false });

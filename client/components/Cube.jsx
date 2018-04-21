@@ -42,7 +42,7 @@ class Cube extends React.Component {
 
   addCubeEffect () {
     var cubeEffectToggle = !(this.state.cubeEffectToggle)
-    console.log(cubeEffectToggle)
+    //console.log(soundControl)
     cubeEffectToggle 
     ?
     this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle,
