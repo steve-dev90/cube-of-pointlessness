@@ -7,6 +7,7 @@ import Header from './Header'
 import WelcomeNav from './WelcomeNav'
 import SelectCube from './SelectCube'
 import Cube from './Cube'
+import UserRegistration from './UserRegistration'
 
 class App extends React.Component {
 
@@ -79,6 +80,10 @@ renderUsers (err, users) {
           <Route exact path='/cubes/:id' render={(props) => {
             return <Cube cubes={this.state.cubes} refreshCubes={this.refreshCubes} 
             users={this.state.users} {...props} />
+          }} />
+
+          <Route exact path='/users' render={(props) => {
+            return <UserRegistration refreshUsers={this.refreshUsers} {...props} />
           }} />
 
         </React.Fragment>  

@@ -13,6 +13,12 @@ function getUsers() {
   return knex('users').select()
 }
 
+function addNewUser (newUser) {
+  //console.log('db',cube_rating.cube_id)
+  return knex('users')
+    .insert({'name': newUser.name, 'email': newUser.email })     
+}
+
 function getCubes2 () {
   return knex('cubes')
     .select('cubes.id','cubes.name', 'cubes.image', knex.raw("AVG(cubeRatings.rating) as rating"))
@@ -42,5 +48,6 @@ module.exports = {
     getCubes2 : getCubes2,
     newRating: newRating,
     getUsers: getUsers,
-    getCubesByUserId: getCubesByUserId
+    getCubesByUserId: getCubesByUserId,
+    addNewUser: addNewUser
 }

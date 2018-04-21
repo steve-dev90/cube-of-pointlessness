@@ -15,7 +15,7 @@ const WelcomeNav = () => {
             <Link className="button" to="./cubes">Choose a cube</ Link>
           </div>
           <div className="one-third column value">
-            <a className="button" href="./users/new">Register user</a>  
+            <Link className="button" to="./users">Register user</ Link>  
           </div>
           <div className="one-third column value">
             <a className="button" href="./documentation">User documentation</a>   
