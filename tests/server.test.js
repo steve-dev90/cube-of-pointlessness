@@ -1,43 +1,36 @@
-import request from 'supertest'
 
-import server from '../server'
+var server = require('../server')
+var request = require('supertest')
 
-// the server keeps the widgets in memory so no knex setup needed
+// Tests don't work (db not defined) with changes made to db.js for heroku
 
 test('tests working', function(){
     expect(true).toBeTruthy()
 })
 
-// test('GET /cubes', () => {
-//   console.log(res.body)  
-//   return request(app)
-//     .get('/api/cubes')
-//     .expect(200)
-//     .then(res => {
-//       expect(res.body.length).toBe(3)
-//     })
-// })
-
-// test('GET /cubes', () => {
-//     console.log(res.body)  
-//     return request(app)
-//       .get('/api/users')
-//       .expect(200)
-//       .then(res => {
-//         expect(res.body.length).toBe(3)
-//       })
-//   })
+test('GET /cubes', () => {
+  var expected = 661 //First cube id 
+  return request(server)
+    .get('/api/cubes')
+    .expect('Content-Type', /json/)
+    .expect(200)
+    .then(res => {
+      //console.log(res.body)
+      expect(res.body[0].id).toEqual(expected)
+    })
+    .catch(err => {expect(err).toBeFalsy()})
+})
 
   test('GET /users', function() {
-    var expected = 5
+    var expected = 991 //First user id
 
     request(server)
     .get('/api/users')
-    //.expect('Content-Type', /json/)
+    .expect('Content-Type', /json/)
     .expect(200)
     .then(res => {
-        console.log(res) 
-        expect(res.body.length).toEqual(expected)
+        //console.log(res.body) 
+        expect(res.body[0].id).toEqual(expected)
     })
     .catch(err => {expect(err).toBeFalsy()})
 })
