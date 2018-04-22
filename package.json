@@ -8,7 +8,8 @@
     "start": "node server",
     "dev": "node server & webpack --watch",
     "postinstall": "webpack && knex migrate:latest",
-    "knex": "knex"
+    "knex": "knex",
+    "test": "jest --watch  --noStackTrace"
   },
   "babel": {
     "presets": [
@@ -35,5 +36,9 @@
     "sqlite3": "^4.0.0",
     "superagent": "^3.8.2",
     "webpack": "^3.10.0"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "supertest": "^3.0.0"
   }
 }
