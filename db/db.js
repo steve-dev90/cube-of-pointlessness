@@ -13,9 +13,10 @@ function getCubes() {
   return knex('cubes').select()
 }
 
-function getUsers() {
+function getUsers(testConn) {
   console.log('DB user called')
-  return knex('users').select()
+  const conn = testConn || knex
+  return conn('users').select()
 }
 
 function addNewUser (newUser) {
