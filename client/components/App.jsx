@@ -90,8 +90,6 @@ renderUsers (err, users) {
 
           <Route exact path='/documentation' component={Documentation} />
           
-
-
         </React.Fragment>  
       </Router>
     )

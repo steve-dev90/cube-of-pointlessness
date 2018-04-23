@@ -1,12 +1,12 @@
 //const path = require('path')
-// const config = require('../knexfile').development
-// const knex = require('knex')(config)
+const config = require('../knexfile').development
+const knex = require('knex')(config)
 
 
 //USE NEXT THREE LINES FOR HEROKU
-const environment = process.env.NODE_ENV || 'development'
-const config = require('../knexfile')[environment]
-const knex = require('knex')(config)
+// const environment = process.env.NODE_ENV || 'development'
+// const config = require('../knexfile')[environment]
+// const knex = require('knex')(config)
 
 function getCubes() {
   //console.log('DB called')
@@ -19,16 +19,18 @@ function getUsers(testConn) {
   return conn('users').select()
 }
 
-function addNewUser (newUser) {
+function addNewUser (newUser, testConn) {
   //console.log('db',cube_rating.cube_id)
-  return knex('users')
+  const conn = testConn || knex
+  return conn('users')
     .insert({'name': newUser.name, 'email': newUser.email })     
 }
 
-function getCubes2 () {
+function getCubes2 (testConn) {
   console.log('getCubes2 called')
-  return knex('cubes')
-    .select('cubes.id','cubes.name', 'cubes.image', knex.raw("AVG(cubeRatings.rating) as rating"))
+  const conn = testConn || knex
+  return conn('cubes')
+    .select('cubes.id','cubes.name', 'cubes.image', conn.raw("AVG(cubeRatings.rating) as rating"))
     .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
     .groupByRaw('cubes.id')     
 }

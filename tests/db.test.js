@@ -1,10 +1,5 @@
-import { Z_DATA_ERROR } from 'zlib';
-
-/* global test beforeEach afterEach expect */
-
 // --FROM knex relationship stories -- //
 
-//const server = require('../server')
 const testEnv = require('./test-environment')
 const db = require('../db/db')
 
@@ -32,3 +27,32 @@ test('test get users from DB', () => {
     .catch(err => console.log(err))
        
 })
+
+test('test get cubes from DB', () => {
+  
+  db.getCubes2(testDb)
+    .then(cubes => {
+      console.log(cubes[0]) 
+      //expected is equal to the first line of the DB
+      var expected = { id: 661, name: 'Sine Cube', image: 'test.png', rating: 0 } 
+      expect(cubes[0]).toBe(expected)    
+    })
+    .catch(err => console.log(err))
+       
+})
+
+test('test post new user', () => {
+  var newTestUser = {'name': 'testUser', 'email': 'test@email' }
+  //Expected result adds new user id 994
+  var expected = 994
+
+  db.addNewUser(newTestUser, testDb)
+    .then(res => {
+      console.log(res) 
+      expect(res).toBe(expected)    
+    })
+    .catch(err => console.log(err))
+       
+})
+
+

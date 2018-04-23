@@ -25,15 +25,15 @@ function sketch (p) {
   
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     //If props.cubeSpeed is not null then assign to speed
-    if (props.soundControl) {
-      console.log('P5 brown', props)
+    // if (props.soundControl) {
+      console.log('props sound', props.soundControl)
       soundControl = props.soundControl
-    }
+    // }
   }
 
   p.draw = function () {
 
-    console.log(soundControl)
+    console.log('draw1',soundControl)
     if (soundControl) {
       song.play()
     } else {
@@ -71,6 +71,9 @@ function sketch (p) {
     //Get amplitude and vary cube size by amplitude
     var rms = analyzer.getLevel();
     p.box(20 + rms*100)
+
+
+    console.log('draw2',soundControl)
 
   }
 }
