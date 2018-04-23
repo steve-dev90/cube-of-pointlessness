@@ -82778,20 +82778,14 @@ function sketch(p) {
   };
 
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
-    //If props.cubeSpeed is not null then assign to speed
-    // if (props.soundControl) {
-    console.log('props sound', props.soundControl);
     soundControl = props.soundControl;
-    // }
   };
 
   p.draw = function () {
 
-    console.log('draw1', soundControl);
     if (soundControl) {
       song.play();
     } else {
-      console.log('checking');
       song.stop();
     }
 
@@ -82799,10 +82793,10 @@ function sketch(p) {
     var limits = [p.width / 2, p.height / 2, 200];
 
     vector = vector.map(function (i, v) {
-      if (i > limits[v] / 2) {
-        return i = limits[v] / 2;
-      } else if (i < -limits[v] / 2) {
-        return i = -limits[v] / 2;
+      if (i > limits[v]) {
+        return i = limits[v];
+      } else if (i < -limits[v]) {
+        return i = -limits[v];
       } else {
         return i += p.random(-3, 3);
       }
@@ -82825,8 +82819,6 @@ function sketch(p) {
     //Get amplitude and vary cube size by amplitude
     var rms = analyzer.getLevel();
     p.box(20 + rms * 100);
-
-    console.log('draw2', soundControl);
   };
 }
 
