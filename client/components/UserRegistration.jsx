@@ -36,7 +36,8 @@ export default class UserRegistration extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <Header title={'Cube user registration'} class={'header-section'} />
+        <Header title={'Cube user registration'} class={'header-section'}
+          classTitle={'title'} />
 
         <div className="user-form-section">
 
@@ -44,12 +45,12 @@ export default class UserRegistration extends React.Component {
             <div className="row">
               <div className="six columns" >
                 <label >Name</label>
-                <input className="u-full-width" name='name' placeholder='Your name' 
+                <input className="u-full-width button" name='name' placeholder='Your name' 
                   onChange={this.handleChange} ref='nameInput'/>
               </div>
               <div className="six columns" >
                 <label >Your email</label>
-                <input className="u-full-width" name='email' 
+                <input className="u-full-width button" name='email' 
                   placeholder="example@mailbox.com" onChange={this.handleChange}
                     ref='emailInput'/>
               </div>

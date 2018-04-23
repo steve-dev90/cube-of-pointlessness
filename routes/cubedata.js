@@ -9,7 +9,7 @@ const db = require('../db/db')
 router.get('/', (req, res) => {
     db.getCubes2()
       .then(cubes => {
-        //console.log('router',cubes)  
+        console.log('router',cubes)  
         res.json(cubes)
       })
       .catch(err => {

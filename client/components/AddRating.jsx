@@ -55,19 +55,25 @@ export default class AddRating extends React.Component {
       <div >
         <form>
           <p>
-            <select name='name' onChange={this.handleChange}>
+            <label>Name</label>
+            <select className='button' name='name' onChange={this.handleChange}>
               {this.props.users.map(user => {
                 return <option key={user.id} value={user.name}>{user.name}</option>
               })}
             </select>
           </p>
-          <p><input placeholder='Rating' name='rating'
-            onChange={this.handleChange}
-            value={this.state.rating}
-          /></p>
-          <button type='button' onClick={this.addRating}>Add your rating</button>
-          <button type='button' onClick={this.props.hideRatingForm}>Cancel</button>
-
+          <p>
+            <label>Rating</label>
+            <input className='button' placeholder='Rating' name='rating'
+              onChange={this.handleChange}
+              value={this.state.rating}/>
+          </p>
+          <p>
+            <button className='button' type='button' onClick={this.addRating}>Add your rating</button>
+          </p>
+          <p>      
+           <button className='button' type='button' onClick={this.props.hideRatingForm}>Cancel</button>
+          </p>      
         </form>
       </div>
     )

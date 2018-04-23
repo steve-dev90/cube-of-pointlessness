@@ -60,26 +60,37 @@ class Cube extends React.Component {
     //console.log('CUBES',cube)  
     return ( 
       <React.Fragment>
-        <Header title={cube.name} class={'header-section'} />
+        <Header title={cube.name} class={'header-section'} classTitle={'title'}/>
           <div className="cubecanvas">
-            <div className="container">
-              <div className="row">       
-                <div className="twelve columns">
+          <div>
+            {/* <div className="container">
+              <div className="row">  
+
+                <div className="six columns"> */}
                   <P5Wrapper sketch={this.state.sketch[this.props.match.params.id]}
                     cubeSpeed={this.state.cubeSpeed} soundControl={this.state.soundControl}/>
-                  
-                  <button onClick={this.rateCubeButton}> Rate Cube </button>
+                </div>  
 
+                {/* <div className='six columns'> */}
+                  <div className='cube-buttons'> 
+
+                  {!(this.state.addRatingForm) &&<p><button className='button' 
+                    onClick={this.rateCubeButton}> Rate Cube </button></p>}
+                                  
                   {this.state.addRatingForm && <AddRating cube_id={cube.id} 
                     refreshCubes={this.props.refreshCubes} 
                     hideRatingForm={this.hideRatingForm}
                     users={this.props.users}/>}
 
-                  <button onClick={this.addCubeEffect}> +/- Effect </button>  
+                  <p><button className='button' onClick={this.addCubeEffect}> +/- Effect </button></p> 
+                  
+                  </div>
+                  {/* </div> */}
+                {/* </div>  */}
 
-                </div>
-              </div>
-            </div> 
+                
+              {/* </div>
+            </div>  */}
           </div>        
         <Footer />
       </React.Fragment>

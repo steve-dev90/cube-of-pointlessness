@@ -1113,7 +1113,7 @@ var url = '/api';
 
 function getCubes(callback) {
   _superagent2.default.get(url + '/cubes').end(function (err, res) {
-    //console.log('get', res.body)  
+    console.log('getCubes api', res.body);
     callback(err, res.body);
   });
 }
@@ -1188,7 +1188,7 @@ var Header = function Header(props) {
           { className: "twelve columns" },
           _react2.default.createElement(
             "h1",
-            { className: "title" },
+            { className: props.classTitle },
             props.title
           )
         )
@@ -1738,7 +1738,7 @@ var Footer = function Footer(props) {
           { className: 'twelve columns' },
           _react2.default.createElement(
             _reactRouterDom.Link,
-            { to: '/' },
+            { className: 'banner-button', to: '/' },
             'Home'
           )
         )
@@ -74138,6 +74138,10 @@ var _UserRegistration = __webpack_require__(97);
 
 var _UserRegistration2 = _interopRequireDefault(_UserRegistration);
 
+var _Documentation = __webpack_require__(107);
+
+var _Documentation2 = _interopRequireDefault(_Documentation);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74225,7 +74229,8 @@ var App = function (_React$Component) {
           _react2.default.Fragment,
           null,
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', render: function render() {
-              return _react2.default.createElement(_Header2.default, { title: 'Cube of Pointlessness', 'class': 'welcome-header-section' });
+              return _react2.default.createElement(_Header2.default, { title: 'Cube of Pointlessness', 'class': 'welcome-header-section',
+                classTitle: 'welcome-title' });
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _WelcomeNav2.default }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/cubes', render: function render(props) {
@@ -74238,7 +74243,8 @@ var App = function (_React$Component) {
             } }),
           _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users', render: function render(props) {
               return _react2.default.createElement(_UserRegistration2.default, _extends({ refreshUsers: _this2.refreshUsers }, props));
-            } })
+            } }),
+          _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/documentation', component: _Documentation2.default })
         )
       );
     }
@@ -82155,8 +82161,8 @@ var WelcomeNav = function WelcomeNav() {
           'div',
           { className: 'one-third column value' },
           _react2.default.createElement(
-            'a',
-            { className: 'button', href: './documentation' },
+            _reactRouterDom.Link,
+            { className: 'button', to: './documentation' },
             'User documentation'
           )
         )
@@ -82201,7 +82207,8 @@ var SelectCube = function SelectCube(props) {
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
-    _react2.default.createElement(_Header2.default, { title: 'Select a cube', 'class': 'header-section' }),
+    _react2.default.createElement(_Header2.default, { title: 'Select a cube', 'class': 'header-section',
+      classTitle: 'title' }),
     _react2.default.createElement(_CubeNav2.default, { cubes: props.cubes, users: props.users }),
     _react2.default.createElement(_Footer2.default, null)
   );
@@ -82321,7 +82328,7 @@ var CubeNav = function (_React$Component) {
               null,
               _react2.default.createElement(
                 'select',
-                { name: 'name', onChange: this.selectUserButton },
+                { name: 'name', className: 'button', onChange: this.selectUserButton },
                 _react2.default.createElement(
                   'option',
                   { value: 'all users' },
@@ -82527,35 +82534,40 @@ var Cube = function (_React$Component) {
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
-        _react2.default.createElement(_Header2.default, { title: cube.name, 'class': 'header-section' }),
+        _react2.default.createElement(_Header2.default, { title: cube.name, 'class': 'header-section', classTitle: 'title' }),
         _react2.default.createElement(
           'div',
           { className: 'cubecanvas' },
           _react2.default.createElement(
             'div',
-            { className: 'container' },
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
+            null,
+            _react2.default.createElement(_reactP5Wrapper2.default, { sketch: this.state.sketch[this.props.match.params.id],
+              cubeSpeed: this.state.cubeSpeed, soundControl: this.state.soundControl })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'cube-buttons' },
+            !this.state.addRatingForm && _react2.default.createElement(
+              'p',
+              null,
               _react2.default.createElement(
-                'div',
-                { className: 'twelve columns' },
-                _react2.default.createElement(_reactP5Wrapper2.default, { sketch: this.state.sketch[this.props.match.params.id],
-                  cubeSpeed: this.state.cubeSpeed, soundControl: this.state.soundControl }),
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.rateCubeButton },
-                  ' Rate Cube '
-                ),
-                this.state.addRatingForm && _react2.default.createElement(_AddRating2.default, { cube_id: cube.id,
-                  refreshCubes: this.props.refreshCubes,
-                  hideRatingForm: this.hideRatingForm,
-                  users: this.props.users }),
-                _react2.default.createElement(
-                  'button',
-                  { onClick: this.addCubeEffect },
-                  ' +/- Effect '
-                )
+                'button',
+                { className: 'button',
+                  onClick: this.rateCubeButton },
+                ' Rate Cube '
+              )
+            ),
+            this.state.addRatingForm && _react2.default.createElement(_AddRating2.default, { cube_id: cube.id,
+              refreshCubes: this.props.refreshCubes,
+              hideRatingForm: this.hideRatingForm,
+              users: this.props.users }),
+            _react2.default.createElement(
+              'p',
+              null,
+              _react2.default.createElement(
+                'button',
+                { className: 'button', onClick: this.addCubeEffect },
+                ' +/- Effect '
               )
             )
           )
@@ -93439,8 +93451,13 @@ var AddRating = function (_React$Component) {
             'p',
             null,
             _react2.default.createElement(
+              'label',
+              null,
+              'Name'
+            ),
+            _react2.default.createElement(
               'select',
-              { name: 'name', onChange: this.handleChange },
+              { className: 'button', name: 'name', onChange: this.handleChange },
               this.props.users.map(function (user) {
                 return _react2.default.createElement(
                   'option',
@@ -93453,20 +93470,32 @@ var AddRating = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            _react2.default.createElement('input', { placeholder: 'Rating', name: 'rating',
+            _react2.default.createElement(
+              'label',
+              null,
+              'Rating'
+            ),
+            _react2.default.createElement('input', { className: 'button', placeholder: 'Rating', name: 'rating',
               onChange: this.handleChange,
-              value: this.state.rating
-            })
+              value: this.state.rating })
           ),
           _react2.default.createElement(
-            'button',
-            { type: 'button', onClick: this.addRating },
-            'Add your rating'
+            'p',
+            null,
+            _react2.default.createElement(
+              'button',
+              { className: 'button', type: 'button', onClick: this.addRating },
+              'Add your rating'
+            )
           ),
           _react2.default.createElement(
-            'button',
-            { type: 'button', onClick: this.props.hideRatingForm },
-            'Cancel'
+            'p',
+            null,
+            _react2.default.createElement(
+              'button',
+              { className: 'button', type: 'button', onClick: this.props.hideRatingForm },
+              'Cancel'
+            )
           )
         )
       );
@@ -93555,7 +93584,8 @@ var UserRegistration = function (_React$Component) {
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
-        _react2.default.createElement(_Header2.default, { title: 'Cube user registration', 'class': 'header-section' }),
+        _react2.default.createElement(_Header2.default, { title: 'Cube user registration', 'class': 'header-section',
+          classTitle: 'title' }),
         _react2.default.createElement(
           'div',
           { className: 'user-form-section' },
@@ -93573,7 +93603,7 @@ var UserRegistration = function (_React$Component) {
                   null,
                   'Name'
                 ),
-                _react2.default.createElement('input', { className: 'u-full-width', name: 'name', placeholder: 'Your name',
+                _react2.default.createElement('input', { className: 'u-full-width button', name: 'name', placeholder: 'Your name',
                   onChange: this.handleChange, ref: 'nameInput' })
               ),
               _react2.default.createElement(
@@ -93584,7 +93614,7 @@ var UserRegistration = function (_React$Component) {
                   null,
                   'Your email'
                 ),
-                _react2.default.createElement('input', { className: 'u-full-width', name: 'email',
+                _react2.default.createElement('input', { className: 'u-full-width button', name: 'email',
                   placeholder: 'example@mailbox.com', onChange: this.handleChange,
                   ref: 'emailInput' })
               )
@@ -109506,6 +109536,85 @@ function camelize(string) {
 }
 
 module.exports = camelize;
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Header = __webpack_require__(17);
+
+var _Header2 = _interopRequireDefault(_Header);
+
+var _Footer = __webpack_require__(26);
+
+var _Footer2 = _interopRequireDefault(_Footer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Documentation = function Documentation() {
+
+  return _react2.default.createElement(
+    _react2.default.Fragment,
+    null,
+    _react2.default.createElement(_Header2.default, { title: 'User Documentation', 'class': 'header-section',
+      classTitle: 'title' }),
+    _react2.default.createElement(
+      'div',
+      { className: 'documentation-section' },
+      _react2.default.createElement(
+        'div',
+        { className: 'container' },
+        _react2.default.createElement(
+          'div',
+          { className: 'row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'twelve columns' },
+            _react2.default.createElement(
+              'p',
+              null,
+              'The boy stood on the burning deck'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'His lips were all a-quiver'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'He gave a cough, his leg fell off'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'And floated down the river.'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              ' - Eric Morecambe '
+            )
+          )
+        )
+      )
+    ),
+    _react2.default.createElement(_Footer2.default, null)
+  );
+};
+
+exports.default = Documentation;
 
 /***/ })
 /******/ ]);

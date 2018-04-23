@@ -1,10 +1,16 @@
 .welcome-header-section {
     margin-top: 20rem;
     font-family: 'Amatic SC', cursive;
+    font-size: 10rem;
 }
 
 .title {
     text-align: center;
+}
+
+.welcome-title {
+    text-align: center;
+    font-size: 10rem;
 }
 
 .custom-cube-button {
@@ -14,6 +20,14 @@
 .sub-header-section {
     margin-top: 6rem;
     font-family: 'Amatic SC', cursive;
+}
+
+.button {
+    font-size: 2.0rem;
+}
+
+.banner-button {
+    font-size: 1.9rem;
 }
 
 .login-section {
@@ -53,9 +67,26 @@
 }
 
 .cubecanvas {
+    display: flex;
     max-width: 90%;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Amatic SC', cursive; 
+    justify-content: center
+    
+}
+
+.documentation-section {
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.8rem;
+}
+
+.cube-buttons {
+    margin-left: 2rem;
 }
 
 .blog-nav {
@@ -64,21 +95,7 @@
     border-radius: 0.5rem;
     padding-left: 1rem;
     max-height: 150px;
-    overflow: scroll;
 }
 
-.blog-nav::-webkit-scrollbar {
-    width: .5em;
-}
- 
-.blog-nav::-webkit-scrollbar-track:vertical {
-    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); 
-    border-radius: 10px;
-}
- 
-.blog-nav::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-  border-radius: 10px;
-}
+
 

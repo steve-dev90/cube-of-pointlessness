@@ -8,7 +8,8 @@ const SelectCube = (props) => {
   //console.log('Select Cube', props.cubes)
   return (
     <React.Fragment>
-      <Header title={'Select a cube'} class={'header-section'} />
+      <Header title={'Select a cube'} class={'header-section'}
+        classTitle={'title'} />
       <CubeNav cubes={props.cubes} users={props.users}/>
       <Footer />
     </React.Fragment>

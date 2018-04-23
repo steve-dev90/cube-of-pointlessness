@@ -6,7 +6,7 @@ const Header = (props) => {
       <div className="container">
         <div className="row">       
           <div className="twelve columns">
-            <h1 className="title">{props.title}</h1>
+            <h1 className={props.classTitle}>{props.title}</h1>
           </div>
         </div>
       </div>     

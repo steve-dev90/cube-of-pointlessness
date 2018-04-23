@@ -1,12 +1,12 @@
 //const path = require('path')
-const config = require('../knexfile').development
-const knex = require('knex')(config)
+// const config = require('../knexfile').development
+// const knex = require('knex')(config)
 
 
 //USE NEXT THREE LINES FOR HEROKU
-// const environment = process.env.NODE_ENV || 'development'
-// const config = require('../knexfile')[environment]
-// const knex = require('knex')(config)
+const environment = process.env.NODE_ENV || 'development'
+const config = require('../knexfile')[environment]
+const knex = require('knex')(config)
 
 function getCubes() {
   //console.log('DB called')
@@ -26,6 +26,7 @@ function addNewUser (newUser) {
 }
 
 function getCubes2 () {
+  console.log('getCubes2 called')
   return knex('cubes')
     .select('cubes.id','cubes.name', 'cubes.image', knex.raw("AVG(cubeRatings.rating) as rating"))
     .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
@@ -33,7 +34,7 @@ function getCubes2 () {
 }
 
 function getCubesByUserId (user_id) {
-  console.log('db', user_id)
+  //console.log('db', user_id)
   return knex('cubes')
     .select('cubes.id','cubes.name', 'cubes.image', knex.raw("AVG(cubeRatings.rating) as rating"))
     .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')

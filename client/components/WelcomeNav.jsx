@@ -18,7 +18,7 @@ const WelcomeNav = () => {
             <Link className="button" to="./users">Register user</ Link>  
           </div>
           <div className="one-third column value">
-            <a className="button" href="./documentation">User documentation</a>   
+            <Link className="button" to="./documentation">User documentation</Link>   
           </div>
         </div>            
       </div>

@@ -66,7 +66,7 @@ class CubeNav extends React.Component {
 
         <div className ="row">
           <form>
-            <select name='name' onChange={this.selectUserButton}>
+            <select name='name' className="button" onChange={this.selectUserButton}>
               <option value='all users'>Rating for all users</option>
               {this.props.users.map(user => {
                 return <option key={user.id} value={user.name}>Rating for {user.name}</option>

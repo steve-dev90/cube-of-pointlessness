@@ -8,6 +8,7 @@ import WelcomeNav from './WelcomeNav'
 import SelectCube from './SelectCube'
 import Cube from './Cube'
 import UserRegistration from './UserRegistration'
+import Documentation from './Documentation'
 
 class App extends React.Component {
 
@@ -68,7 +69,8 @@ renderUsers (err, users) {
       <Router>
         <React.Fragment >
           <Route exact path='/' render={() => {
-            return <Header title={'Cube of Pointlessness'} class={'welcome-header-section'} />
+            return <Header title={'Cube of Pointlessness'} class={'welcome-header-section'}
+            classTitle={'welcome-title'} />
           }} />
           <Route exact path='/' component={WelcomeNav}/>
 
@@ -85,6 +87,10 @@ renderUsers (err, users) {
           <Route exact path='/users' render={(props) => {
             return <UserRegistration refreshUsers={this.refreshUsers} {...props} />
           }} />
+
+          <Route exact path='/documentation' component={Documentation} />
+          
+
 
         </React.Fragment>  
       </Router>
