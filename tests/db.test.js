@@ -16,42 +16,44 @@ beforeEach(() => {
 afterEach(() => testEnv.cleanup(testDb))
 
 test('test get users from DB', () => {
-  
-  db.getUsers(testDb)
+
+  //expected is equal to the first line of the DB
+  var expected = { id: 991, name: 'Steve', email: 'test@test.com' } 
+  //Don't forget about the return! 
+  return db.getUsers(testDb)
     .then(users => {
-      console.log(users[0]) 
-      //expected is equal to the first line of the DB
-      var expected = { id: 992, name: 'Steve', email: 'test@test.com' } 
-      expect(users[0]).toBe(expected)    
+      //console.log(users[0]) 
+      expect(users[0]).toEqual(expected)    
     })
-    .catch(err => console.log(err))
+    .catch(err => {expect(err).toBeNull()})
        
 })
 
 test('test get cubes from DB', () => {
   
-  db.getCubes2(testDb)
+  var expected = { id: 661, name: 'Sine Cube', image: 'test.png', rating: 0 } 
+  return db.getCubes2(testDb)
     .then(cubes => {
       console.log(cubes[0]) 
       //expected is equal to the first line of the DB
-      var expected = { id: 661, name: 'Sine Cube', image: 'test.png', rating: 0 } 
-      expect(cubes[0]).toBe(expected)    
+      
+      expect(cubes[0]).toEqual(expected)    
     })
-    .catch(err => console.log(err))
+    .catch(err => {expect(err).toBeNull()})
        
 })
 
 test('test post new user', () => {
   var newTestUser = {'name': 'testUser', 'email': 'test@email' }
-  //Expected result adds new user id 994
-  var expected = 994
+  //Expected result adds new user id 994 for seed database
+  var expected = [994]
 
-  db.addNewUser(newTestUser, testDb)
+  return db.addNewUser(newTestUser, testDb)
     .then(res => {
       console.log(res) 
-      expect(res).toBe(expected)    
+      expect(res).toEqual(expected)    
     })
-    .catch(err => console.log(err))
+    .catch(err => {expect(err).toBeNull()})
        
 })
 
