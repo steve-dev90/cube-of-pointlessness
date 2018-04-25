@@ -74018,7 +74018,7 @@ module.exports = shallowEqual;
  * 
  */
 
-var isTextNode = __webpack_require__(101);
+var isTextNode = __webpack_require__(102);
 
 /*eslint-disable no-bitwise */
 
@@ -74089,7 +74089,7 @@ var _App2 = _interopRequireDefault(_App);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var React = __webpack_require__(0);
-var ReactDOM = __webpack_require__(99);
+var ReactDOM = __webpack_require__(100);
 
 document.addEventListener('DOMContentLoaded', function () {
   ReactDOM.render(React.createElement(_App2.default, null), document.getElementById('app'));
@@ -74134,11 +74134,11 @@ var _Cube = __webpack_require__(90);
 
 var _Cube2 = _interopRequireDefault(_Cube);
 
-var _UserRegistration = __webpack_require__(97);
+var _UserRegistration = __webpack_require__(98);
 
 var _UserRegistration2 = _interopRequireDefault(_UserRegistration);
 
-var _Documentation = __webpack_require__(98);
+var _Documentation = __webpack_require__(99);
 
 var _Documentation2 = _interopRequireDefault(_Documentation);
 
@@ -82453,6 +82453,10 @@ var _Brown = __webpack_require__(94);
 
 var _Brown2 = _interopRequireDefault(_Brown);
 
+var _Wind = __webpack_require__(96);
+
+var _Wind2 = _interopRequireDefault(_Wind);
+
 var _Footer = __webpack_require__(18);
 
 var _Footer2 = _interopRequireDefault(_Footer);
@@ -82461,7 +82465,7 @@ var _Header = __webpack_require__(12);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _AddRating = __webpack_require__(96);
+var _AddRating = __webpack_require__(97);
 
 var _AddRating2 = _interopRequireDefault(_AddRating);
 
@@ -82483,7 +82487,7 @@ var Cube = function (_React$Component) {
 
     _this.state = {
       addRatingForm: false,
-      sketch: { 661: _Protocube2.default, 662: _Brown2.default, 663: _Brown2.default },
+      sketch: { 661: _Protocube2.default, 662: _Brown2.default, 663: _Wind2.default },
       cubeSpeed: 0,
       cubeEffectToggle: false,
       soundControl: false
@@ -82722,13 +82726,13 @@ function sketch(p) {
     p.translate(p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed));
     p.rotateZ(p.frameCount * 0.02);
 
-    p.specularMaterial('red');
+    //p.specularMaterial('red')
 
     var c1 = p.frameCount % 255;
 
     p.ambientLight(100);
-    p.pointLight(c1, 250, 250, 100, 100, 0);
-    p.specularMaterial(204, 102, 0, 50);
+    p.pointLight(250, 250, 250, 100, 100, 0);
+    p.specularMaterial(c1, 102, 0, 50);
     //p.noStroke()
 
     p.box(50);
@@ -93362,6 +93366,60 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+
+function sketch(p) {
+
+  p.setup = function () {
+    p.createCanvas(600, 600, p.WEBGL);
+  };
+
+  //Initial cube speed
+  var speed = 0.005;
+  //console.log('P5 brown', props.speed)
+  p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
+    //If props.cubeSpeed is not null then assign to speed
+    if (props.cubeSpeed) {
+      console.log('P5 brown', props);
+      speed = props.cubeSpeed;
+    }
+  };
+
+  p.draw = function () {
+
+    p.background(250);
+    p.rotateY(p.frameCount * 0.01);
+
+    //var speed = 0.005
+
+    p.translate(p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed));
+    p.rotateZ(p.frameCount * 0.02);
+
+    //p.specularMaterial('red')
+
+    var c1 = p.frameCount % 255;
+
+    p.ambientLight(100);
+    p.pointLight(250, 250, 250, 100, 100, 0);
+    p.specularMaterial(c1, 102, 0, 50);
+    //p.noStroke()
+
+    p.box(50);
+  };
+}
+
+exports.default = sketch;
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -93502,7 +93560,7 @@ var AddRating = function (_React$Component) {
 exports.default = AddRating;
 
 /***/ }),
-/* 97 */
+/* 98 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93636,7 +93694,7 @@ var UserRegistration = function (_React$Component) {
 exports.default = UserRegistration;
 
 /***/ }),
-/* 98 */
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93715,7 +93773,7 @@ var Documentation = function Documentation() {
 exports.default = Documentation;
 
 /***/ }),
-/* 99 */
+/* 100 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93753,15 +93811,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(100);
+  module.exports = __webpack_require__(101);
 } else {
-  module.exports = __webpack_require__(103);
+  module.exports = __webpack_require__(104);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 100 */
+/* 101 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -93997,7 +94055,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
 
 
 /***/ }),
-/* 101 */
+/* 102 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -94012,7 +94070,7 @@ Z.injectIntoDevTools({findFiberByHostInstance:pb,bundleType:0,version:"16.2.0",r
  * @typechecks
  */
 
-var isNode = __webpack_require__(102);
+var isNode = __webpack_require__(103);
 
 /**
  * @param {*} object The object to check.
@@ -94025,7 +94083,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 102 */
+/* 103 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -94053,7 +94111,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 103 */
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -94087,8 +94145,8 @@ var containsNode = __webpack_require__(41);
 var focusNode = __webpack_require__(42);
 var emptyObject = __webpack_require__(13);
 var checkPropTypes = __webpack_require__(28);
-var hyphenateStyleName = __webpack_require__(104);
-var camelizeStyleName = __webpack_require__(106);
+var hyphenateStyleName = __webpack_require__(105);
+var camelizeStyleName = __webpack_require__(107);
 
 /**
  * WARNING: DO NOT manually require this module.
@@ -109455,7 +109513,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(1)))
 
 /***/ }),
-/* 104 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -109470,7 +109528,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(105);
+var hyphenate = __webpack_require__(106);
 
 var msPattern = /^ms-/;
 
@@ -109497,7 +109555,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 105 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -109533,7 +109591,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 106 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -109548,7 +109606,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(107);
+var camelize = __webpack_require__(108);
 
 var msPattern = /^-ms-/;
 
@@ -109576,7 +109634,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 107 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

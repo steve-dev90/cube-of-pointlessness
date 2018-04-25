@@ -13,6 +13,7 @@ router.get('/', (req, res) => {
         res.json(cubes)
       })
       .catch(err => {
+        console.log({err})
         res.status(500).send('DATABASE ERROR: ' + err.message)
       })
 })

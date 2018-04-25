@@ -2,6 +2,7 @@ import React from 'react'
 import P5Wrapper from 'react-p5-wrapper'
 import sketch_1 from '../P5sketches/Protocube'
 import sketch_2 from '../P5sketches/Brown'
+import sketch_3 from '../P5sketches/Wind'
 import Footer from './Footer'
 import Header from './Header'
 import AddRating from './AddRating'
@@ -14,7 +15,7 @@ class Cube extends React.Component {
 
     this.state = {
       addRatingForm: false,
-      sketch: {661: sketch_1, 662: sketch_2, 663: sketch_2},
+      sketch: {661: sketch_1, 662: sketch_2, 663: sketch_3},
       cubeSpeed: 0,
       cubeEffectToggle: false,
       soundControl: false

@@ -27,13 +27,13 @@ function sketch (p) {
     p.translate(p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed));
     p.rotateZ(p.frameCount * 0.02)
        
-    p.specularMaterial('red')
+    //p.specularMaterial('red')
 
     var c1 = p.frameCount % 255
 
     p.ambientLight(100);
-    p.pointLight(c1, 250, 250, 100, 100, 0);
-    p.specularMaterial(204, 102, 0, 50);
+    p.pointLight(250, 250, 250, 100, 100, 0);
+    p.specularMaterial(c1, 102, 0, 50);
     //p.noStroke()
     
     p.box(50)
