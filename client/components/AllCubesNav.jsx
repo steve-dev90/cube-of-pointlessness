@@ -21,7 +21,7 @@ const AllCubesNav = (props) => {
             </div>
             
             <div className="one-third column value">
-              <h3>{cube.rating}</h3> 
+              <h3>{cube.rating ? cube.rating.toFixed(1): cube.rating}</h3> 
             </div>
           </div> 
           )    

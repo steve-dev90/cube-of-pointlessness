@@ -82414,7 +82414,7 @@ var AllCubesNav = function AllCubesNav(props) {
           _react2.default.createElement(
             'h3',
             null,
-            cube.rating
+            cube.rating ? cube.rating.toFixed(1) : cube.rating
           )
         )
       );
