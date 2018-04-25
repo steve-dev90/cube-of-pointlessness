@@ -29,8 +29,9 @@ function addNewUser (newUser, testConn) {
 function getCubes2 (testConn) {
   console.log('getCubes2 called')
   const conn = testConn || knex
-  return conn('cubes')
+  return conn('*')
     .select('cubes.id','cubes.name', 'cubes.image', conn.raw("AVG(cubeRatings.rating) as rating"))
+    .from('cubes')
     .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
     .groupByRaw('cubes.id')     
 }
