@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
             table.string('image')
         }),
 
-        knex.schema.createTable('cubeRatings', function (table) {
+        knex.schema.createTable('cuberatings', function (table) {
             table.integer('user_id')
             table.integer('cube_id')
             table.integer('rating')
@@ -28,7 +28,7 @@ exports.down = function(knex, Promise) {
     return Promise.all([
         knex.schema.dropTable('users'),
         knex.schema.dropTable('cubes'),
-        knex.schema.dropTable('cubeRatings')
+        knex.schema.dropTable('cuberatings')
     ])
     
 };

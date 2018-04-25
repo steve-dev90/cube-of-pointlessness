@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn knex run seed
+  /usr/local/bin/node /usr/local/bin/yarn knex migrate:migrate
 
 PATH: 
-  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 Yarn version: 
   1.5.1
@@ -5664,7 +5664,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c knex run seed
+  Arguments: -c knex migrate:migrate
   Directory: /Users/stevetorrens/workspace/cube-of-pointlessness
   Output:
   

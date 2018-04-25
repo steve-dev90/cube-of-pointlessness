@@ -16,7 +16,7 @@ exports.seed = function(knex, Promise) {
     knex('cubeRatings').del()
     .then(function () {
       // Inserts seed entries
-      return knex('cubeRatings').insert([
+      return knex('cuberatings').insert([
         {user_id: 991, cube_id: 661, rating: 0 },
         {user_id: 992, cube_id: 661, rating: 0 },
         {user_id: 991, cube_id: 662, rating: 0 },
