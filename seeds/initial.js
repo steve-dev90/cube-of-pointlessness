@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
       ])
     }),
 
-    knex('cubeRatings').del()
+    knex('cuberatings').del()
     .then(function () {
       // Inserts seed entries
       return knex('cuberatings').insert([
