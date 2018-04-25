@@ -1,30 +1,44 @@
 
 
 function sketch (p) {
+
+    var vector = [0,0,0]
  
     p.setup = function () {
-      p.createCanvas(600, 600, p.WEBGL);
+      p.createCanvas(600, 600, p.WEBGL)
+      vector[0] = -p.width/2
+      console.log(vector[0]) 
+
     };
    
-    //Initial cube speed
-    var speed = 0.005
+
     //console.log('P5 brown', props.speed)
     p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
       //If props.cubeSpeed is not null then assign to speed
-      if (props.cubeSpeed) {
-        console.log('P5 brown', props)
-        speed = props.cubeSpeed
-      }
+    //   if (props.cubeSpeed) {
+    //     console.log('P5 brown', props)
+    //     speed = props.cubeSpeed
+      //}
+       
     }
-  
+
+
     p.draw = function () {
   
       p.background(250)
+      
+      if (vector[0] < 0) {
+         var ref = p.width - vector[0] 
+      } else {
+         var ref = p.width + vector[0]  
+      } 
+      var delta = 0.001 + 0.00005*ref+p.random(-0.001,0.00)
+      vector[0] += delta
+      //vector[1] = 0.002+ 0.005*vector[0]* vector[0]-0.001*vector[0]* vector[0]*vector[0]
+      console.log(vector[0],vector[1])
+      
+      p.translate(vector[0], vector[1], vector[2]);
       p.rotateY(p.frameCount * 0.01)
-  
-      //var speed = 0.005
-        
-      p.translate(p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed));
       p.rotateZ(p.frameCount * 0.02)
          
       //p.specularMaterial('red')
