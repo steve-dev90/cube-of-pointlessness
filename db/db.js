@@ -31,7 +31,7 @@ function getCubes2 (testConn) {
   const conn = testConn || knex
   return conn('*')
     .select('cubes.id','cubes.name', 'cubes.image', conn.raw("AVG(cubeRatings.rating) as rating"))
-    .from('cubes')
+    .from('cubes', 'cubeRatings')
     .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
     .groupByRaw('cubes.id')     
 }
