@@ -31,12 +31,13 @@ function getCubes2 (testConn) {
   const conn = testConn || knex
   return conn('cubes')
     .select('cubes.id','cubes.name', 'cubes.image', conn.raw("AVG(cubeRatings.rating) as rating"))
-    .leftJoin('cubeRatings', 'cubes.id','=','cubeRatings.cube_id')
+    .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
     .groupByRaw('cubes.id')     
 }
 
 function getCubesByUserId (user_id) {
-  //console.log('db', user_id)
+  //console.log('db getcubes', user_id)
+  //const conn = testConn || knex
   return knex('cubes')
     .select('cubes.id','cubes.name', 'cubes.image', knex.raw("AVG(cubeRatings.rating) as rating"))
     .leftJoin('cubeRatings', 'cubes.id','cubeRatings.cube_id')
