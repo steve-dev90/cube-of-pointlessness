@@ -1,11 +1,19 @@
-var express = require('express')
+const express = require('express')
 
-var server = express()
+const PORT = process.env.PORT || 3000
 
-server.use(express.static('./'))
+const server = express()
 
-server.get('/', (req, res) => {
-    res.send('<h1><em>Hello world</em></h1>')
+const cubedata = require('./routes/cubedata')
+const userdata = require('./routes/userdata')
+
+server.use(express.static('public'))
+
+server.use('/api/cubes', cubedata)
+server.use('/api/users', userdata)
+
+server.listen(PORT, () => {
+  console.log('Listening on port', PORT)
 })
 
 module.exports = server

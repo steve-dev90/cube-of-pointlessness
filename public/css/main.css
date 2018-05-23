@@ -1,0 +1,101 @@
+.welcome-header-section {
+    margin-top: 20rem;
+    font-family: 'Amatic SC', cursive;
+    font-size: 10rem;
+}
+
+.title {
+    text-align: center;
+}
+
+.welcome-title {
+    text-align: center;
+    font-size: 10rem;
+}
+
+.custom-cube-button {
+    text-align: right;
+}
+
+.sub-header-section {
+    margin-top: 6rem;
+    font-family: 'Amatic SC', cursive;
+}
+
+.button {
+    font-size: 2.0rem;
+}
+
+.banner-button {
+    font-size: 1.9rem;
+}
+
+.login-section {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10rem;
+    text-align: center;
+    font-family: 'Amatic SC', cursive;
+}
+
+.header-section {
+    margin-top: 5rem;
+    font-family: 'Amatic SC', cursive;
+    margin-bottom: 5rem;
+}  
+
+.footer-section {
+    margin-top: 5rem;
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+}
+
+.list-cubes {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Amatic SC', cursive;
+    text-align: center   
+}
+
+.user-form-section {
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Amatic SC', cursive;    
+}
+
+.cubecanvas {
+    display: flex;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Amatic SC', cursive; 
+    justify-content: center
+    
+}
+
+.documentation-section {
+    font-family: 'Amatic SC', cursive;
+    text-align: center;
+    max-width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 1.8rem;
+}
+
+.cube-buttons {
+    margin-left: 2rem;
+}
+
+.blog-nav {
+    /* background-color: rgb(230, 230, 230);
+    color: white; */
+    border-radius: 0.5rem;
+    padding-left: 1rem;
+    max-height: 150px;
+}
+
+
+
