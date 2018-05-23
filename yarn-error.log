@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn knex migrate:migrate
+  /usr/local/bin/node /usr/local/bin/yarn
 
 PATH: 
   /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -5662,9 +5662,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 2
   Command: sh
-  Arguments: -c knex migrate:migrate
+  Arguments: -c webpack && knex migrate:latest
   Directory: /Users/stevetorrens/workspace/cube-of-pointlessness
   Output:
   
