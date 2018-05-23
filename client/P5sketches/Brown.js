@@ -9,7 +9,7 @@ function sketch (p) {
   var soundControl = false
 
   p.preload = function () {
-    song = p.loadSound('/sounds/sound2.m4a')
+    song = p.loadSound('/sounds/sound2.wav')
   }  
 
   p.setup = function () {
