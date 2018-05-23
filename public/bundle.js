@@ -1171,7 +1171,6 @@ function getCubesByUserId(callback, id) {
 }
 
 function getUsers(callback) {
-  //console.log('getusers')
   _superagent2.default.get(url + '/users').end(function (err, res) {
     //console.log('get', res.body)  
     callback(err, res.body);
@@ -1192,8 +1191,6 @@ function addCubeRating(cubeRating) {
 }
 
 function addUser(newUser) {
-
-  console.log('api', newUser);
   return _superagent2.default.post(url + '/users').send(newUser).catch(function (err) {
     throw Error('Cannot POST a new Post!');
   });
@@ -82768,7 +82765,7 @@ function sketch(p) {
   var soundControl = false;
 
   p.preload = function () {
-    song = p.loadSound('/sounds/sound2.mp3');
+    song = p.loadSound('/sounds/sound2.m4a');
   };
 
   p.setup = function () {
