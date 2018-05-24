@@ -7,5 +7,5 @@ This project shows floating cubes. Users can select which cube to see, rate the 
 
 I used this project as a sandpit so that I could try out and expore react.js, P5.js and knex.js.
 
-## Deployed
+## Deployed to Heroku
 This project has been deployed to heroku at https://cube-pointless.herokuapp.com/#/cubes/662. The effects for the random cube don't yet work.
