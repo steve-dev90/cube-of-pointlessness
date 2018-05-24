@@ -82766,6 +82766,9 @@ function sketch(p) {
   var context = new AudioContext();
 
   p.preload = function () {
+    context.resume().then(function () {
+      return console.log('hello1');
+    });
     song = p.loadSound('/sounds/sound2.m4a');
   };
 
@@ -82787,9 +82790,7 @@ function sketch(p) {
 
     if (soundControl) {
       song.play();
-      context.resume().then(function () {
-        return console.log('hello1');
-      });
+      //context.resume().then(() => console.log('hello1'))
     } else {
       song.stop();
       //context.close().then(() => console.log('hello2'))
