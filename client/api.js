@@ -5,19 +5,15 @@ const url = '/api'
 export function getCubes (callback) {
   request
     .get(url+'/cubes')
-    .end((err, res) => {
-      console.log('getCubes api', res.body)  
+    .end((err, res) => { 
       callback(err, res.body)
     })
 }
 
 export function getCubesByUserId (callback, id) {
-  //var u = url+'/cubes/'
-  console.log('api',id)
   request
     .get(url+'/cubes/'+id)
-    .end((err, res) => {
-      //console.log('get', res.body)  
+    .end((err, res) => { 
       callback(err, res.body)
     })
 }
@@ -25,8 +21,7 @@ export function getCubesByUserId (callback, id) {
 export function getUsers (callback) {
   request
     .get(url+'/users')
-    .end((err, res) => {
-      //console.log('get', res.body)  
+    .end((err, res) => { 
       callback(err, res.body)
     })
 }

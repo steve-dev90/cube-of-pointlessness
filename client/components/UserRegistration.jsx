@@ -17,7 +17,6 @@ export default class UserRegistration extends React.Component {
 
 
   handleChange (e) {
-    console.log(e.target.value)
     this.setState({
         [e.target.name]: e.target.value
     })
@@ -25,7 +24,6 @@ export default class UserRegistration extends React.Component {
 
   addUser (e) {
     e.preventDefault()              
-    console.log(this.state)
     addUser(this.state)
     this.props.refreshUsers()
     //This resets the form so that the same placeholder's are displayed after reset

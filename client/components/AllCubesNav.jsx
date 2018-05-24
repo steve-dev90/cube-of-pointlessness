@@ -5,7 +5,7 @@ const AllCubesNav = (props) => {
 
   var cubesToShow = props.displayRatingsForAllUsers ? 
     props.cubes : props.cubesByUserID     
-  //console.log({cubesToShow})     
+      
   return (
     <React.Fragment>
       {cubesToShow.map((cube) => {
@@ -13,7 +13,7 @@ const AllCubesNav = (props) => {
         return (
           <div className ="row" key={cube.id}>
             <div className="one-third column value">
-              <a href="https://placeholder.com"><img src="http://via.placeholder.com/100x100"/></a>
+              <img className='cube-image' src={`/images/${cube.image}`}/>
             </div>
 
             <div className="one-third column value">

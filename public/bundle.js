@@ -1156,23 +1156,18 @@ var url = '/api';
 
 function getCubes(callback) {
   _superagent2.default.get(url + '/cubes').end(function (err, res) {
-    console.log('getCubes api', res.body);
     callback(err, res.body);
   });
 }
 
 function getCubesByUserId(callback, id) {
-  //var u = url+'/cubes/'
-  console.log('api', id);
   _superagent2.default.get(url + '/cubes/' + id).end(function (err, res) {
-    //console.log('get', res.body)  
     callback(err, res.body);
   });
 }
 
 function getUsers(callback) {
   _superagent2.default.get(url + '/users').end(function (err, res) {
-    //console.log('get', res.body)  
     callback(err, res.body);
   });
 }
@@ -74188,7 +74183,6 @@ var App = function (_React$Component) {
   }, {
     key: 'renderCubes',
     value: function renderCubes(err, cubes) {
-      console.log('cube', cubes);
       this.setState({
         error: err,
         cubes: cubes || []
@@ -74208,7 +74202,6 @@ var App = function (_React$Component) {
   }, {
     key: 'renderUsers',
     value: function renderUsers(err, users) {
-      //console.log('app', users)
       this.setState({
         error: err,
         users: users || []
@@ -82253,8 +82246,6 @@ var CubeNav = function (_React$Component) {
     _classCallCheck(this, CubeNav);
 
     var _this = _possibleConstructorReturn(this, (CubeNav.__proto__ || Object.getPrototypeOf(CubeNav)).call(this, props));
-    //console.log('Cubenav2 ren',props) 
-
 
     _this.state = {
       cubesByUserID: [],
@@ -82270,7 +82261,6 @@ var CubeNav = function (_React$Component) {
   _createClass(CubeNav, [{
     key: 'refreshCubesByUserId',
     value: function refreshCubesByUserId(id, err) {
-      //console.log('refresh',id)
       this.setState({
         error: err
       });
@@ -82279,7 +82269,6 @@ var CubeNav = function (_React$Component) {
   }, {
     key: 'renderCubesByUserId',
     value: function renderCubesByUserId(err, cubes) {
-      console.log('cubeID', cubes);
       this.setState({
         error: err,
         cubesByUserID: cubes || []
@@ -82299,15 +82288,12 @@ var CubeNav = function (_React$Component) {
         var user_id = this.props.users.find(function (user) {
           return e.target.value == user.name;
         }).id;
-        console.log('User', user_id);
         this.refreshCubesByUserId(user_id);
-        console.log(this.state);
       }
     }
   }, {
     key: 'render',
     value: function render(props) {
-      //console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
       return _react2.default.createElement(
         'div',
         { className: 'list-cubes' },
@@ -82374,7 +82360,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var AllCubesNav = function AllCubesNav(props) {
 
   var cubesToShow = props.displayRatingsForAllUsers ? props.cubes : props.cubesByUserID;
-  //console.log({cubesToShow})     
+
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
@@ -82386,11 +82372,7 @@ var AllCubesNav = function AllCubesNav(props) {
         _react2.default.createElement(
           'div',
           { className: 'one-third column value' },
-          _react2.default.createElement(
-            'a',
-            { href: 'https://placeholder.com' },
-            _react2.default.createElement('img', { src: 'http://via.placeholder.com/100x100' })
-          )
+          _react2.default.createElement('img', { className: 'cube-image', src: '/images/' + cube.image })
         ),
         _react2.default.createElement(
           'div',
@@ -82501,7 +82483,6 @@ var Cube = function (_React$Component) {
   _createClass(Cube, [{
     key: 'rateCubeButton',
     value: function rateCubeButton() {
-      //console.log('heeeeloooo')
       this.setState({
         addRatingForm: true
       });
@@ -82517,7 +82498,6 @@ var Cube = function (_React$Component) {
     key: 'addCubeEffect',
     value: function addCubeEffect() {
       var cubeEffectToggle = !this.state.cubeEffectToggle;
-      //console.log(soundControl)
       cubeEffectToggle ? this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle,
         soundControl: true }) : this.setState({ cubeSpeed: 0.005, cubeEffectToggle: cubeEffectToggle,
         soundControl: false });
@@ -82531,7 +82511,6 @@ var Cube = function (_React$Component) {
         return cube.id == _this2.props.match.params.id;
       });
 
-      //console.log('CUBES',cube)  
       return _react2.default.createElement(
         _react2.default.Fragment,
         null,
@@ -93630,14 +93609,12 @@ var UserRegistration = function (_React$Component) {
   _createClass(UserRegistration, [{
     key: 'handleChange',
     value: function handleChange(e) {
-      console.log(e.target.value);
       this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
   }, {
     key: 'addUser',
     value: function addUser(e) {
       e.preventDefault();
-      console.log(this.state);
       (0, _api.addUser)(this.state);
       this.props.refreshUsers();
       //This resets the form so that the same placeholder's are displayed after reset
