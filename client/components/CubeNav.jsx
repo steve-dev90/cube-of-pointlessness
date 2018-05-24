@@ -7,7 +7,6 @@ import AllCubesNav from './AllCubesNav';
 class CubeNav extends React.Component {
 
   constructor(props) {
-    //console.log('Cubenav2 ren',props) 
     super(props)
 
     this.state = {
@@ -21,7 +20,6 @@ class CubeNav extends React.Component {
   }
 
   refreshCubesByUserId (id, err) {
-    //console.log('refresh',id)
     this.setState({
       error: err,
     })
@@ -29,7 +27,6 @@ class CubeNav extends React.Component {
   }
 
   renderCubesByUserId (err, cubes) {
-    console.log('cubeID',cubes)
     this.setState({
       error: err,
       cubesByUserID: cubes || []
@@ -47,15 +44,12 @@ class CubeNav extends React.Component {
       })
       var user_id = this.props.users
         .find((user) => e.target.value == user.name)
-        .id
-      console.log('User',user_id)                
+        .id               
       this.refreshCubesByUserId(user_id)
-      console.log(this.state)
     }
   }
 
-  render(props) {
-    //console.log('Cubenav ren',this.state.cubes, this.props.cubes)  
+  render(props) { 
     return (
       <div className="list-cubes">
         <div className="container">

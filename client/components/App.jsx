@@ -41,7 +41,6 @@ class App extends React.Component {
   }
 
   renderCubes (err, cubes) {
-    console.log('cube',cubes)
     this.setState({
       error: err,
       cubes: cubes || []
@@ -57,7 +56,6 @@ refreshUsers (err) {
 }
 
 renderUsers (err, users) {
-  //console.log('app', users)
   this.setState({
     error: err,
     users: users || []
@@ -95,7 +93,6 @@ renderUsers (err, users) {
     )
   } 
 }
-
 
 export default App
 

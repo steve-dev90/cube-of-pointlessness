@@ -29,7 +29,6 @@ class Cube extends React.Component {
   }
 
   rateCubeButton () {
-    //console.log('heeeeloooo')
     this.setState({
       addRatingForm: true
     })
@@ -43,7 +42,6 @@ class Cube extends React.Component {
 
   addCubeEffect () {
     var cubeEffectToggle = !(this.state.cubeEffectToggle)
-    //console.log(soundControl)
     cubeEffectToggle 
     ?
     this.setState({ cubeSpeed: 0.1, cubeEffectToggle: cubeEffectToggle,
@@ -57,8 +55,7 @@ class Cube extends React.Component {
     
     var cube = this.props.cubes
                   .find(cube => cube.id == this.props.match.params.id)
-                  
-    //console.log('CUBES',cube)  
+                   
     return ( 
       <React.Fragment>
         <Header title={cube.name} class={'header-section'} classTitle={'title'}/>
