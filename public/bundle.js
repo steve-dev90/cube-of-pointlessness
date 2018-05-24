@@ -1171,7 +1171,6 @@ function getCubesByUserId(callback, id) {
 }
 
 function getUsers(callback) {
-  //console.log('getusers')
   _superagent2.default.get(url + '/users').end(function (err, res) {
     //console.log('get', res.body)  
     callback(err, res.body);
@@ -1192,8 +1191,6 @@ function addCubeRating(cubeRating) {
 }
 
 function addUser(newUser) {
-
-  console.log('api', newUser);
   return _superagent2.default.post(url + '/users').send(newUser).catch(function (err) {
     throw Error('Cannot POST a new Post!');
   });
@@ -82766,9 +82763,13 @@ function sketch(p) {
   var song, analyzer;
   var vector = [0, 0, 0];
   var soundControl = false;
+  var context = new AudioContext();
 
   p.preload = function () {
-    song = p.loadSound('/sounds/sound1.wav');
+    context.resume().then(function () {
+      return console.log('hello1');
+    });
+    song = p.loadSound('/sounds/sound2.m4a');
   };
 
   p.setup = function () {
@@ -82789,8 +82790,10 @@ function sketch(p) {
 
     if (soundControl) {
       song.play();
+      //context.resume().then(() => console.log('hello1'))
     } else {
       song.stop();
+      //context.close().then(() => console.log('hello2'))
     }
 
     //Limit the travel of the cube

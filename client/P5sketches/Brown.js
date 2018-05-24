@@ -7,9 +7,11 @@ function sketch (p) {
   var song, analyzer
   var vector = [0,0,0]
   var soundControl = false
+  var context = new AudioContext()
 
   p.preload = function () {
-    song = p.loadSound('/sounds/sound1.wav')
+    context.resume().then(() => console.log('hello1'))
+    song = p.loadSound('/sounds/sound2.m4a')
   }  
 
   p.setup = function () {
@@ -31,8 +33,10 @@ function sketch (p) {
 
     if (soundControl) {
       song.play()
+      //context.resume().then(() => console.log('hello1'))
     } else {
       song.stop()
+      //context.close().then(() => console.log('hello2'))
     }
 
     //Limit the travel of the cube

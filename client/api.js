@@ -23,7 +23,6 @@ export function getCubesByUserId (callback, id) {
 }
 
 export function getUsers (callback) {
-  //console.log('getusers')
   request
     .get(url+'/users')
     .end((err, res) => {
@@ -47,8 +46,6 @@ export function addCubeRating (cubeRating) {
 }
 
 export function addUser (newUser) {
-
-  console.log('api',newUser)
   return request.post(url+'/users')
     .send(newUser)
     .catch(err => {
