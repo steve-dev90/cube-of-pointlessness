@@ -1,5 +1,8 @@
 import React from 'react'
 
+//This component is a generic header for the site. Takes a CSS class name ('classTitle') 
+//and title via props
+
 const Header = (props) => {
   return (
     <div className={props.class}>
