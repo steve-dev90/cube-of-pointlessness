@@ -2,6 +2,11 @@
 import p5 from 'p5'
 import 'p5/lib/addons/p5.sound'
 
+//This P5 sketch moves a 3D cube randomly in space constrained by the 
+//boundaries for the canvas.
+//The user can play music and the size of the cube will respond to the 
+//amplitude of the music.
+
 function sketch (p) {
 
   var song, analyzer
@@ -10,7 +15,7 @@ function sketch (p) {
   var context = new AudioContext()
 
   p.preload = function () {
-    context.resume().then(() => console.log('hello1'))
+    //context.resume().then(() => console.log('hello1'))
     song = p.loadSound('/sounds/sound2.m4a')
   }  
 
@@ -33,10 +38,8 @@ function sketch (p) {
 
     if (soundControl) {
       song.play()
-      //context.resume().then(() => console.log('hello1'))
     } else {
       song.stop()
-      //context.close().then(() => console.log('hello2'))
     }
 
     //Limit the travel of the cube

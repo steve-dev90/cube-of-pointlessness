@@ -2,27 +2,31 @@
 const config = require('../knexfile').development
 const knex = require('knex')(config)
 
-
 //USE NEXT THREE LINES FOR HEROKU
 // const environment = process.env.NODE_ENV || 'development'
 // const config = require('../knexfile')[environment]
 // const knex = require('knex')(config)
 
+//Get all cubes from the cubes table
 function getCubes() {
   return knex('cubes').select()
 }
 
+//Get all users from the user table
 function getUsers(testConn) {
   const conn = testConn || knex
   return conn('users').select()
 }
 
+//Add a new user
 function addNewUser (newUser, testConn) {
   const conn = testConn || knex
   return conn('users')
     .insert({'name': newUser.name, 'email': newUser.email })     
 }
 
+//Get all cubes and their average ratings gouped by user ID. 
+//Left join used to return cubes with no rating
 function getCubes2 (testConn) {
   const conn = testConn || knex
   return conn('*')
@@ -32,6 +36,7 @@ function getCubes2 (testConn) {
     .groupByRaw('cubes.id')     
 }
 
+//Get all cubes and their ratings for an specified user ID
 function getCubesByUserId (user_id) {
   //const conn = testConn || knex
   return knex('cubes')
@@ -41,6 +46,7 @@ function getCubesByUserId (user_id) {
     .groupByRaw('cubes.id')     
 }
 
+//Add a new cube rating
 function newRating (cube_rating) {
   return knex('cuberatings')
     .insert({'user_id': cube_rating.user_id, 'cube_id': cube_rating.cube_id, 

@@ -6,6 +6,7 @@ router.use(bodyParser.json())
 
 const db = require('../db/db')
 
+//Server side GET for a new user
 router.get('/', (req, res) => {
     db.getUsers()
       .then(users => {
@@ -17,6 +18,7 @@ router.get('/', (req, res) => {
       })
 }) 
 
+//Server side POST for a new user
 router.post('/', (req, res) => {
   console.log('POST',req.body)
 

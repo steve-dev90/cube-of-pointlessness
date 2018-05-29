@@ -2,6 +2,8 @@ import React from 'react'
 
 import {addCubeRating,getCubes} from '../api'
 
+//This component is the cube rating form.
+
 export default class AddRating extends React.Component {
   constructor (props) {
     super(props)
@@ -10,22 +12,17 @@ export default class AddRating extends React.Component {
       cube_id: props.cube_id,
       rating: 1,
       name: "",
-      //users: [{id: '551', name: 'Bob'}, {id: '552', name: 'Steve'}]
     }
     this.handleChange = this.handleChange.bind(this)
     this.addRating = this.addRating.bind(this)
   }
 
-
+  //Add input data to this component's state
   handleChange (e) {
-    console.log(this.props.users)
     if (e.target.name == 'name') {
-      //console.log(e.target.value,this.props.users[0].name)
-      //if (e.target.value == "" ) {e.target.value = this.props.users[0].name}
       var user_id2 = this.props.users
         .find((user) => e.target.value == user.name)
-        .id
-      console.log(user_id2)                
+        .id               
       this.setState({
         user_id: user_id2
       })      
@@ -38,14 +35,10 @@ export default class AddRating extends React.Component {
   }
 
   addRating (e) {
-    //api call for DB goes here
+    //Post the cube rating to the database, update the site 
+    //with the new cube data and then hide the form (as the user is done)
     e.preventDefault()              
-    console.log(this.state)
     addCubeRating(this.state)
-      // .then(res => {
-      //   console.log("HELLOOOOO34")
-      //   this.props.refreshCubes()
-      // })
     this.props.refreshCubes()
     this.props.hideRatingForm()
   }

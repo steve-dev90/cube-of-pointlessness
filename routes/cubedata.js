@@ -6,6 +6,7 @@ router.use(bodyParser.json())
 
 const db = require('../db/db')
 
+//Server side GET for cube data with ratings
 router.get('/', (req, res) => {
     db.getCubes2()
       .then(cubes => { 
@@ -17,6 +18,7 @@ router.get('/', (req, res) => {
       })
 })
 
+//Server side GET for cube data with ratings for a specified user ID
 router.get('/:id', (req, res) => {
     console.log('router',req.params.id)
     db.getCubesByUserId(Number(req.params.id))
@@ -28,6 +30,7 @@ router.get('/:id', (req, res) => {
       })
 })
 
+//Server side POST for a new cube rating
 router.post('/:id', (req, res) => {
 
     var cubeRating = {
