@@ -3,6 +3,8 @@ import React from 'react'
 import Header from './Header'
 import Footer from './Footer'
 
+//This component provides, the not particularly serious, user documentation for the site. 
+
 const Documentation = () => {
 
   return (

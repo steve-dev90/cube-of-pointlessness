@@ -4,6 +4,8 @@ import Footer from './Footer'
 
 import {addUser} from '../api'
 
+//This component allows a user to register. No authenication required.
+
 export default class UserRegistration extends React.Component {
   constructor (props) {
     super(props)

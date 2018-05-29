@@ -1,6 +1,8 @@
 import React from 'react'
 import {HashRouter as Router, Route, Link} from 'react-router-dom'
 
+//This component displays the cubes to be selected. 
+
 const AllCubesNav = (props) => {
 
   var cubesToShow = props.displayRatingsForAllUsers ? 

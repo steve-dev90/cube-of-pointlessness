@@ -2,6 +2,7 @@ import request from 'superagent'
 
 const url = '/api'
 
+//Client side GET for cube data with ratings
 export function getCubes (callback) {
   request
     .get(url+'/cubes')
@@ -10,6 +11,7 @@ export function getCubes (callback) {
     })
 }
 
+//Client side GET for cube data with ratings for a specified user ID
 export function getCubesByUserId (callback, id) {
   request
     .get(url+'/cubes/'+id)
@@ -18,6 +20,7 @@ export function getCubesByUserId (callback, id) {
     })
 }
 
+//Client side GET for users
 export function getUsers (callback) {
   request
     .get(url+'/users')
@@ -26,9 +29,9 @@ export function getUsers (callback) {
     })
 }
 
+//Client side POST for cube rating
 export function addCubeRating (cubeRating) {
   cubeRating.rating = Number(cubeRating.rating)
-  console.log('api',cubeRating)
   return request.post(url+`/cubes/${cubeRating.cube_id}`)
     .send(cubeRating)
     // .then(data => {
@@ -40,6 +43,7 @@ export function addCubeRating (cubeRating) {
     })
 }
 
+//Client side POST for new user
 export function addUser (newUser) {
   return request.post(url+'/users')
     .send(newUser)

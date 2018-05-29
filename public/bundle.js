@@ -912,6 +912,9 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//This component is a generic header for the site. Takes a CSS class name ('classTitle') 
+//and title via props
+
 var Header = function Header(props) {
   return _react2.default.createElement(
     "div",
@@ -1154,27 +1157,30 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var url = '/api';
 
+//Client side GET for cube data with ratings
 function getCubes(callback) {
   _superagent2.default.get(url + '/cubes').end(function (err, res) {
     callback(err, res.body);
   });
 }
 
+//Client side GET for cube data with ratings for a specified user ID
 function getCubesByUserId(callback, id) {
   _superagent2.default.get(url + '/cubes/' + id).end(function (err, res) {
     callback(err, res.body);
   });
 }
 
+//Client side GET for users
 function getUsers(callback) {
   _superagent2.default.get(url + '/users').end(function (err, res) {
     callback(err, res.body);
   });
 }
 
+//Client side POST for cube rating
 function addCubeRating(cubeRating) {
   cubeRating.rating = Number(cubeRating.rating);
-  console.log('api', cubeRating);
   return _superagent2.default.post(url + ('/cubes/' + cubeRating.cube_id)).send(cubeRating)
   // .then(data => {
   //   const returnedPost = data.body
@@ -1185,6 +1191,7 @@ function addCubeRating(cubeRating) {
   });
 }
 
+//Client side POST for new user
 function addUser(newUser) {
   return _superagent2.default.post(url + '/users').send(newUser).catch(function (err) {
     throw Error('Cannot POST a new Post!');
@@ -1209,6 +1216,8 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRouterDom = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//This component is a generic footer for the site
 
 var Footer = function Footer(props) {
   return _react2.default.createElement(
@@ -74142,6 +74151,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//This is the main navigational component for the site, and defines all the
+//hash routes.
+//NOTE: The site uses skeleton CSS framework
+
 var App = function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -82192,8 +82205,10 @@ var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//This component sets out the select cube page. 
+
 var SelectCube = function SelectCube(props) {
-  //console.log('Select Cube', props.cubes)
+
   return _react2.default.createElement(
     _react2.default.Fragment,
     null,
@@ -82258,6 +82273,9 @@ var CubeNav = function (_React$Component) {
     return _this;
   }
 
+  //Get cube information, in particular ratings, by user ID
+
+
   _createClass(CubeNav, [{
     key: 'refreshCubesByUserId',
     value: function refreshCubesByUserId(id, err) {
@@ -82274,6 +82292,12 @@ var CubeNav = function (_React$Component) {
         cubesByUserID: cubes || []
       });
     }
+
+    //This function determines the ratings to be displayed. If displayRatingsForAllUsers
+    //is true, show rating for each cube averaged over all users. Otherwise find
+    //the user_id of the selected user and show rating for each cube as 
+    //provided by that user
+
   }, {
     key: 'selectUserButton',
     value: function selectUserButton(e) {
@@ -82356,6 +82380,8 @@ var _react2 = _interopRequireDefault(_react);
 var _reactRouterDom = __webpack_require__(9);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//This component displays the cubes to be selected. 
 
 var AllCubesNav = function AllCubesNav(props) {
 
@@ -82455,6 +82481,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+//Wrapper for P5.js
+
+
+//This component sets out the page for an individual cube
 
 var Cube = function (_React$Component) {
   _inherits(Cube, _React$Component);
@@ -82466,6 +82496,7 @@ var Cube = function (_React$Component) {
 
     _this.state = {
       addRatingForm: false,
+      //Hard coded each P5 sketch to the cube_id
       sketch: { 661: _Protocube2.default, 662: _Brown2.default, 663: _Wind2.default },
       cubeSpeed: 0,
       cubeEffectToggle: false,
@@ -82480,6 +82511,9 @@ var Cube = function (_React$Component) {
     return _this;
   }
 
+  //Toggles on the cube rating form
+
+
   _createClass(Cube, [{
     key: 'rateCubeButton',
     value: function rateCubeButton() {
@@ -82487,6 +82521,9 @@ var Cube = function (_React$Component) {
         addRatingForm: true
       });
     }
+
+    //Toggle off the cube rating form
+
   }, {
     key: 'hideRatingForm',
     value: function hideRatingForm() {
@@ -82494,6 +82531,10 @@ var Cube = function (_React$Component) {
         addRatingForm: false
       });
     }
+
+    //Toggle on/off the effects for the P5 sketches. These parameters
+    //are passed through to the P5 sketch component as props  
+
   }, {
     key: 'addCubeEffect',
     value: function addCubeEffect() {
@@ -82507,6 +82548,7 @@ var Cube = function (_React$Component) {
     value: function render(props) {
       var _this2 = this;
 
+      //find the cube corresponding to the url id
       var cube = this.props.cubes.find(function (cube) {
         return cube.id == _this2.props.match.params.id;
       });
@@ -82673,7 +82715,8 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
+//This P5 sketch moves a 3D cube in a sinusoidal fashion.
+//The user can change the speed of the movement
 
 function sketch(p) {
 
@@ -82683,7 +82726,6 @@ function sketch(p) {
 
   //Initial cube speed
   var speed = 0.005;
-  //console.log('P5 brown', props.speed)
   p.myCustomRedrawAccordingToNewPropsHandler = function (props) {
     //If props.cubeSpeed is not null then assign to speed
     if (props.cubeSpeed) {
@@ -82697,19 +82739,14 @@ function sketch(p) {
     p.background(250);
     p.rotateY(p.frameCount * 0.01);
 
-    //var speed = 0.005
-
     p.translate(p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed) * 100, p.sin(p.frameCount * speed));
     p.rotateZ(p.frameCount * 0.02);
-
-    //p.specularMaterial('red')
 
     var c1 = p.frameCount % 255;
 
     p.ambientLight(100);
     p.pointLight(250, 250, 250, 100, 100, 0);
     p.specularMaterial(c1, 102, 0, 50);
-    //p.noStroke()
 
     p.box(50);
   };
@@ -82736,6 +82773,11 @@ __webpack_require__(95);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//This P5 sketch moves a 3D cube randomly in space constrained by the 
+//boundaries for the canvas.
+//The user can play music and the size of the cube will respond to the 
+//amplitude of the music.
+
 //Import the p5.js sound library
 function sketch(p) {
 
@@ -82745,9 +82787,7 @@ function sketch(p) {
   var context = new AudioContext();
 
   p.preload = function () {
-    context.resume().then(function () {
-      return console.log('hello1');
-    });
+    //context.resume().then(() => console.log('hello1'))
     song = p.loadSound('/sounds/sound2.m4a');
   };
 
@@ -82769,10 +82809,8 @@ function sketch(p) {
 
     if (soundControl) {
       song.play();
-      //context.resume().then(() => console.log('hello1'))
     } else {
       song.stop();
-      //context.close().then(() => console.log('hello2'))
     }
 
     //Limit the travel of the cube
@@ -93347,7 +93385,7 @@ src_app = function () {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
+//Work in progress
 
 function sketch(p) {
 
@@ -93431,6 +93469,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//This component is the cube rating form.
+
 var AddRating = function (_React$Component) {
   _inherits(AddRating, _React$Component);
 
@@ -93444,24 +93484,22 @@ var AddRating = function (_React$Component) {
       cube_id: props.cube_id,
       rating: 1,
       name: ""
-      //users: [{id: '551', name: 'Bob'}, {id: '552', name: 'Steve'}]
     };
     _this.handleChange = _this.handleChange.bind(_this);
     _this.addRating = _this.addRating.bind(_this);
     return _this;
   }
 
+  //Add input data to this component's state
+
+
   _createClass(AddRating, [{
     key: 'handleChange',
     value: function handleChange(e) {
-      console.log(this.props.users);
       if (e.target.name == 'name') {
-        //console.log(e.target.value,this.props.users[0].name)
-        //if (e.target.value == "" ) {e.target.value = this.props.users[0].name}
         var user_id2 = this.props.users.find(function (user) {
           return e.target.value == user.name;
         }).id;
-        console.log(user_id2);
         this.setState({
           user_id: user_id2
         });
@@ -93472,14 +93510,10 @@ var AddRating = function (_React$Component) {
   }, {
     key: 'addRating',
     value: function addRating(e) {
-      //api call for DB goes here
+      //Post the cube rating to the database, update the site 
+      //with the new cube data and then hide the form (as the user is done)
       e.preventDefault();
-      console.log(this.state);
       (0, _api.addCubeRating)(this.state);
-      // .then(res => {
-      //   console.log("HELLOOOOO34")
-      //   this.props.refreshCubes()
-      // })
       this.props.refreshCubes();
       this.props.hideRatingForm();
     }
@@ -93588,6 +93622,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//This component allows a user to register. No authenication required.
 
 var UserRegistration = function (_React$Component) {
   _inherits(UserRegistration, _React$Component);
@@ -93708,6 +93744,8 @@ var _Footer = __webpack_require__(18);
 var _Footer2 = _interopRequireDefault(_Footer);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//This component provides, the not particularly serious, user documentation for the site. 
 
 var Documentation = function Documentation() {
 

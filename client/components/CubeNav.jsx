@@ -18,7 +18,8 @@ class CubeNav extends React.Component {
     this.refreshCubesByUserId = this.refreshCubesByUserId.bind(this)
     this.renderCubesByUserId = this.renderCubesByUserId.bind(this)
   }
-
+  
+  //Get cube information, in particular ratings, by user ID
   refreshCubesByUserId (id, err) {
     this.setState({
       error: err,
@@ -33,6 +34,10 @@ class CubeNav extends React.Component {
     })
   }
 
+  //This function determines the ratings to be displayed. If displayRatingsForAllUsers
+  //is true, show rating for each cube averaged over all users. Otherwise find
+  //the user_id of the selected user and show rating for each cube as 
+  //provided by that user
   selectUserButton (e) {
     if (e.target.value == 'all users') {
       this.setState({

@@ -10,6 +10,10 @@ import Cube from './Cube'
 import UserRegistration from './UserRegistration'
 import Documentation from './Documentation'
 
+//This is the main navigational component for the site, and defines all the
+//hash routes.
+//NOTE: The site uses skeleton CSS framework
+
 class App extends React.Component {
 
   constructor(props) {
