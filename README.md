@@ -1,6 +1,6 @@
 # Cube of pointlessness
 
-This is my personnel project completed in week 6 of the Enspiral Dev Academy boot camp. I have made some small changes since then to tidy up the code for presentation.
+This is my personal project completed in week 6 of the Enspiral Dev Academy boot camp. I have made some small changes since then to tidy up the code for presentation.
 
 ## What is it all about
 This project shows floating cubes. Users can select which cube to see, rate the cube and add some special effects.
